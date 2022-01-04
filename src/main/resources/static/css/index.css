@@ -1,0 +1,53 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{
+	font-family: "SBAggroB", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+input, button, select, optgroup, textarea, label, .alert, .badge, .blockquote-footer, .btn, .navbar, .pagination, .valid-feedback, .invalid-feedback {
+    font-family: 'Noto Sans KR', "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+body{
+	font-family: 'Noto Sans KR', "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	font-weight:300;
+}
+
+/* 
+ * 카페 예약 메인 페이지
+ * 2022.01.03 
+ * 작성자 : 김성겸
+ */
+
+.cafe-find-wrap{
+	background-color:#fff;
+	display:flex;
+	border-radius:50px;
+	padding:10px;
+}
+.multiply{
+	mix-blend-mode: multiply;
+}
+.cafe-search-txt,.cafe-search-date{width:42%; padding:0 15px;}
+.cafe-search-txt label,
+.cafe-search-date label{display:block; font-size:13px;}
+.cafe-search-date{border-left:1px solid #e7e7e7;}
+.cafe-search-txt input,
+.cafe-search-date input{display:block; font-size:14px;border:0;width:100%;}
+.cafe-search-btn{width:16%;min-width: 110px;}
+.cafe-search-btn button.btn.btn-lg{width:100%;height: 100%;font-size: 14px;}
+
+.location-item{overflow:hidden;}
+.location-img{height:240px; position:relative; overflow:hidden;}
+.location-img img{position:absolute; top:50%; left:0; transform:translateY(-50%);}
+
+.location-desc{height:160px;}
+
+
+
+
+
