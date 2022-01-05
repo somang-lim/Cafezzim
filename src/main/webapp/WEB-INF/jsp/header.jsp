@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<main class="main" id="top">
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3"
 	data-navbar-on-scroll="data-navbar-on-scroll">
 	<div class="container">
