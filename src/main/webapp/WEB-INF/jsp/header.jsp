@@ -5,7 +5,7 @@
 	data-navbar-on-scroll="data-navbar-on-scroll">
 	<div class="container">
 		<a class="navbar-brand d-flex align-items-center fw-bold fs-2"
-			href="index.html">
+			href="/">
 			<div class="text-warning">App</div>
 			<div class="text-1000">Lab</div>
 		</a>
@@ -26,7 +26,7 @@
 				<li class="nav-item" data-anchor="data-anchor"><a
 					class="nav-link fw-medium" href="#faq">FAQ</a></li>
 			</ul>
-			<form class="ps-lg-5">
+			<form class="ps-lg-5" action="signIn">
 				<button class="btn btn-lg btn-light rounded-pill order-0"
 					type="submit">
 					<i class="far fa-user"></i>
