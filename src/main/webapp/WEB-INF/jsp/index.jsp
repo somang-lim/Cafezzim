@@ -13,38 +13,7 @@
 <!--    Document Title-->
 <!-- ===============================================-->
 <title>카페 예약 사이트</title>
-
-
-<!-- ===============================================-->
-<!--    Favicons-->
-<!-- ===============================================-->
-<link rel="apple-touch-icon" sizes="180x180"
-	href="img/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32"
-	href="img/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16"
-	href="img/favicons/favicon-16x16.png">
-<link rel="shortcut icon" type="image/x-icon"
-	href="img/favicons/favicon.ico">
-<link rel="manifest" href="img/favicons/manifest.json">
-<meta name="msapplication-TileImage"
-	content="assets/img/favicons/mstile-150x150.png">
-<meta name="theme-color" content="#ffffff">
-
-
-<!-- ===============================================-->
-<!--    Stylesheets-->
-<!-- ===============================================-->
-<!-- 웹폰트 CDN 링크 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet">
-<!-- fontawesome CDN 링크 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
-<link href="css/theme.css" rel="stylesheet" />
-<link href="css/index.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<%@include file="common.jsp" %>
 </head>
 
 
@@ -54,39 +23,8 @@
 	<!--    Main Content-->
 	<!-- ===============================================-->
 	<main class="main" id="top">
-		<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3"
-			data-navbar-on-scroll="data-navbar-on-scroll">
-			<div class="container">
-				<a class="navbar-brand d-flex align-items-center fw-bold fs-2"
-					href="index.html">
-					<div class="text-warning">App</div>
-					<div class="text-1000">Lab</div>
-				</a>
-				<button class="navbar-toggler collapsed" type="button"
-					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div
-					class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0"
-					id="navbarSupportedContent">
-					<ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-						<li class="nav-item" data-anchor="data-anchor"><a
-							class="nav-link fw-medium active" aria-current="page"
-							href="#top">Home</a></li>
-						<li class="nav-item" data-anchor="data-anchor"><a
-							class="nav-link fw-medium" href="#location">지역별 검색</a></li>
-						<li class="nav-item" data-anchor="data-anchor"><a
-							class="nav-link fw-medium" href="#faq">FAQ</a></li>
-					</ul>
-					<form class="ps-lg-5">
-						<button class="btn btn-lg btn-light rounded-pill order-0"
-							type="submit"><i class="far fa-user"></i></button>
-					</form>
-				</div>
-			</div>
-		</nav>
+		<%@include file="header.jsp" %>
+		
 		<section class="py-0" id="searchMain">
 			<div class="bg-holder"
 				style="background-image: url(img/gallery/hero-bg.jpg); background-position: center; background-size: cover;">
@@ -667,16 +605,6 @@
 
 
 
-	<!-- ===============================================-->
-	<!--    JavaScripts-->
-	<!-- ===============================================-->
-	<script src="vendors/@popperjs/popper.min.js"></script>
-	<script src="vendors/bootstrap/bootstrap.min.js"></script>
-	<script src="vendors/is/is.min.js"></script>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
-	<script src="js/theme.js"></script>
-	<script src="js/common.js"></script>
+<%@include file="footer.jsp" %>
 </body>
 </html>
