@@ -14,7 +14,7 @@
 <!-- ===============================================-->
 <title>카페 예약 사이트</title>
 <%@include file="../common.jsp" %>
-<link href="css/login.css" rel="stylesheet" />
+<link href="css/signIn.css" rel="stylesheet" />
 
 </head>
 
@@ -30,21 +30,21 @@
 		<section class="py-8" id="searchMain">
 			<main class="form-signin">
 			  <form action="signIn">
-			    <img class="mb-4" src="./brand/bootstrap-logo.svg" alt="" width="72" height="57">
+			    <img class="mb-2" src="./img/CafeZzim-logo.png" alt="" width="75" height="75">
 			    <h1 class="h3 mb-5 fw-normal">CafeZzim</h1>
 			
 			    <div class="form-floating my-3">
-			      <input type="text" class="form-control" id="floatingInput" placeholder="아이디" required="required">
+			      <input type="text" class="form-control" id="floatingInput" placeholder="아이디" required="required" autocomplete="off">
 			      <label for="floatingInput">아이디</label>
 			    </div>
 			    
 			     <div class="form-floating my-3">
-			      <input type="text" class="form-control" id="floatingInput" placeholder="이름" required="required">
+			      <input type="text" class="form-control" id="floatingInput" placeholder="이름" required="required" autocomplete="off">
 			      <label for="floatingInput">이름</label>
 			    </div>
 			    
 			    <div class="form-floating my-2">
-			      <input type="email" class="form-control" id="floatingInput" placeholder="이메일" required="required">
+			      <input type="email" class="form-control" id="floatingInput" placeholder="이메일" required="required" autocomplete="off">
 			      <label for="floatingInput">이메일</label>
 			    </div>
 			
@@ -52,7 +52,7 @@
 			    <div class="text-center links">
 			    	<a href="signIn">로그인</a> | <a href="searchId">아이디 찾기</a> | <a href="singUp">회원가입</a>
 			    </div>
-			    <p class="mt-5 mb-3 text-muted">&copy; CafeZzim</p>
+			    <p class="mt-5 mb-3 text-muted text-center">&copy; CafeZzim</p>
 			  </form>
 			</main>
 		</section>

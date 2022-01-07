@@ -1,14 +1,11 @@
 @charset "UTF-8";
 
-.row {
-	background-color: rgba(a, a, a, 0.8);
-}
-
 .modal-sheet .modal-dialog {
   width: 380px;
   
   transition: bottom .75s ease-in-out;
 }
+
 .modal-sheet .modal-footer {
   padding-bottom: 2rem;
 }
@@ -17,8 +14,18 @@
   width: 380px;
 }
 
-.border-right { border-right: 1px solid #eee; }
+.border-right {
+	border-right: 1px solid #eee;
+}
 
 .modal-tour .modal-dialog {
   width: 380px;
+}
+
+.modal-content {
+	border: 0;
+}
+
+.modal-backdrop {
+	background-color: rgba(0, 0, 0, 0.2);
 }
