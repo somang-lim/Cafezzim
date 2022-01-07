@@ -27,12 +27,13 @@
 		<section class="pt-9 pb-1 ml-5" id="kind">
 			<h3 class="mx-10">My page</h3>
 		</section>
-			<!---------------------- 마이페이지 메뉴바 ------------------------------------------>
+	<!---------------------- 마이페이지 메뉴바 ------------------------------------------>
 		<div class="d-flex justify-content-between w-70 mb-1 mx-8 border-0 p-4">
 			<input type="button" class="form-control btn-primary" value="회원 정보 관리">
 			<input type="button" class="form-control" value="예약 관리">
 			<input type="button" class="form-control" value="카페 관리">
 		</div>
+		
 		<section class="py-3">
 			<div class="container">
 				<div class="row flex-center">
@@ -95,8 +96,7 @@
 						</form>
 					</div>
 				</div>
-			</div>
-			<!-- //container -->
+			</div><!-- //container -->
 		</section>
 
 <%@include file="footer.jsp" %>
