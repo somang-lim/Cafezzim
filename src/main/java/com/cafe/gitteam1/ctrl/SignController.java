@@ -33,7 +33,7 @@ public class SignController {
 		if(isSignIn) {
 			mv.setViewName("redirect:/");
 		} else {
-			mv.setViewName("member/signIn1");
+			mv.setViewName("member/signIn");
 			mv.addObject("message", "failure");
 		}
 		return mv;
@@ -55,6 +55,7 @@ public class SignController {
 	
 	@RequestMapping("signOut")
 	public ModelAndView signOut (HttpSession session, ModelAndView mv) {
+		
 		service.signOut(session);
 		mv.setViewName("redirect:/");
 		return mv;

@@ -12,7 +12,7 @@ $(function(){
 		} else if(!password){
 			return;
 		}
-		document.frmSignIn.action = "signInCheck1";
+		document.frmSignIn.action = "signInCheck";
 		document.frmSignIn.submit();
 	})
 })

@@ -34,14 +34,17 @@ public class MemberService {
 				session.setAttribute("name", vo2.getMember_name());
 				session.setAttribute("grade", vo2.getMember_grade());
 				
-				System.out.println("member_id=" + vo2.getMember_id());
-				System.out.println("name=" + vo2.getMember_name());
-				System.out.println("grade=" + vo2.getMember_grade());
-				
 				isSignIn = true;
-			} else {
+			}
+			/*
+			 * 오류 내용(500 에러)
+			 * Transaction rolled back because it has been marked as rollback-only
+			 * org.springframework.transaction.UnexpectedRollbackException:
+			 * 
+			else {
 				manager.rollback(status);
 			}
+			*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
