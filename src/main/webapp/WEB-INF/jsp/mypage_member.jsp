@@ -24,15 +24,19 @@
 	<!-- ===============================================-->
 	
 	<%@include file="header.jsp" %>
-		<section class="">
+		<section class="pt-9 pb-1 ml-5" id="kind">
+			<h3 class="mx-10">My page</h3>
+		</section>
+			<!---------------------- 마이페이지 메뉴바 ------------------------------------------>
+		<div class="d-flex justify-content-between w-70 mb-1 mx-8 border-0 p-4">
+			<input type="button" class="form-control btn-primary" value="회원 정보 관리">
+			<input type="button" class="form-control" value="예약 관리">
+			<input type="button" class="form-control" value="카페 관리">
+		</div>
+		<section class="py-3">
 			<div class="container">
 				<div class="row flex-center">
 					<div class="col-12 col-md-6">
-						<div class="row mb-3">
-							<button type="button" class="btn btn-light col-4">회원정보 관리</button>
-							<button type="button" class="btn btn-light col-4">카페정보 관리</button>
-							<button type="button" class="btn btn-light col-4">예약정보 관리</button>
-						</div>
 							
 						<h2>회원 정보 관리</h2>
 						<form name="frm_member" method="post" id="frm_member">
