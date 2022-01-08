@@ -77,10 +77,10 @@
 
 
 			<form class="dayOffCheck">
-				<div class="cafe-dayOff-date col-7 mb-4">
+				<div class="cafe-dayOff-date col-md-7 mb-4">
 					<label for="datePicker" class="form-label">날짜</label>
 					<div class="choose-date mb-1">
-						<input type="text" name="date" id="datePicker" class="dayPicker"
+						<input type="text" name="date" id="datePicker" class="form-control w-75 dayPicker"
 							placeholder="날짜를 알려주세요">
 					</div>
 				</div>
@@ -92,9 +92,8 @@
 						<i class="fas fa-minus-circle fa-lg" id="minus-time" onclick="hide_select(); toggle_time()"></i>
 					</div>
 					<div class="select-time" id="select-time">
-						<div class="start-time">
-							<label for="select-start" class="form-label">시작</label>
-							<select name="start-time" id="select-start" class="select-start">
+						<div class="start-time mb-3">
+							<select name="start-time" id="select-start" class="form-select select-start w-75">
 								<option selected>시작 시간을 선택하세요.</option>
 								<option>10:00</option>
 								<option>11:00</option>
@@ -109,9 +108,8 @@
 								<option>20:00</option>
 							</select>
 						</div>
-						<div class="end-time">
-							<label for="select-end" class="form-label">종료</label> <select
-								name="end-time" id="select-end" class="select-end">
+						<div class="end-time mb-3">
+							<select name="end-time" id="select-end" class="form-select select-end w-75">
 								<option selected>종료 시간을 선택하세요.</option>
 								<option>10:00</option>
 								<option>11:00</option>
@@ -138,15 +136,15 @@
 					<div class="choose-table" id="choose-table">
 						<div class="table-for-two mb-2">
 							<label for="two-table-count">2인 테이블</label>
-							<input type="number" class="w-25 text-center table-count" value=3>
+							<input type="number" class="form-control w-25 text-center table-count" value=3>
 						</div>
 						<div class="table-for-four mb-2">
 							<label for="four-table-count">4인 테이블</label>
-							<input type="number"	class="w-25 text-center table-count" value=2>
+							<input type="number"	class="form-control w-25 text-center table-count" value=2>
 						</div>
 					</div>
 				</div>
-				<button type="button" class="btn btn-primary btn-lg" id="dayOff-apply">적용</button>
+				<button type="button" class="btn btn-primary btn-lg w-25" id="dayOff-apply">적용</button>
 			</form>
 		</div>
 	</div>
