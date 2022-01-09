@@ -38,8 +38,16 @@ function toggle_table(){
 	}
 }
 
+	
 $(function(){
 	$("#dayOff-apply").click(function(){
 		alert("요청하신 영업 일시 중지가 적용되었습니다.");	
 	})
+	
+	$("#datePicker").datepicker({
+		format : "yyyy-mm-dd",
+		startDate: "-7d",
+		language : "ko",
+		todayHighlight: true
+	});
 })

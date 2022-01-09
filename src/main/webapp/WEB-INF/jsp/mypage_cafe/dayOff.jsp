@@ -75,8 +75,9 @@
 		<div class="col-md-7 col-lg-7">
 			<h4 class="mb-3">영업 일시 중지</h4>
 
-
+			
 			<form class="dayOffCheck">
+				<!------------------------- 영업 날짜 ------------------------------------------>
 				<div class="cafe-dayOff-date col-md-7 mb-4">
 					<label for="datePicker" class="form-label">날짜</label>
 					<div class="choose-date mb-1">
@@ -84,7 +85,8 @@
 							placeholder="날짜를 알려주세요">
 					</div>
 				</div>
-
+				
+				<!------------------------- 영업 시간 ------------------------------------------>
 				<div class="cafe-dayOff-time col-7 mb-4">
 					<div class="select-zone mb-1">
 						<label>시간</label>
@@ -127,6 +129,7 @@
 					</div>
 				</div>
 
+				<!------------------------- 영업 테이블 ------------------------------------------>
 				<div class="cafe-dayOff-table col-7 mb-4">
 					<div class="select-table mb-1">
 						<label>테이블</label>
@@ -136,11 +139,11 @@
 					<div class="choose-table" id="choose-table">
 						<div class="table-for-two mb-2">
 							<label for="two-table-count">2인 테이블</label>
-							<input type="number" class="form-control w-25 text-center table-count" value=3>
+							<input type="number" class="form-control w-25 text-center table-count" id="two-table-count" value=3>
 						</div>
 						<div class="table-for-four mb-2">
 							<label for="four-table-count">4인 테이블</label>
-							<input type="number"	class="form-control w-25 text-center table-count" value=2>
+							<input type="number"	class="form-control w-25 text-center table-count" id="four-table-count" value=2>
 						</div>
 					</div>
 				</div>
