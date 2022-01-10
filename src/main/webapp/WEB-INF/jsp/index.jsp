@@ -34,7 +34,7 @@
 					
 					<!-- 카페 검색 form 부분 -->
 					<div class="col-lg-10 col-xl-6">
-						<form name="frm_search" action="" method="post" class="mb-6">
+						<form name="frm_search" action="search" method="get" class="mb-6">
 							<div class="cafe-find-wrap">
 								<!-- 위치 혹은 카페명으로 검색 -->
 								<div class="cafe-search-txt">
@@ -47,7 +47,7 @@
 									<input type="text" name="date" id="datePicker" placeholder="날짜를 알려주세요">
 								</div>
 								<div class="cafe-search-btn text-center">
-									<button type="button" class="btn btn-lg btn-primary rounded-pill hover-top"><i class="fas fa-search"></i> 검색</button>
+									<button type="submit" class="btn btn-lg btn-primary rounded-pill hover-top"><i class="fas fa-search"></i> 검색</button>
 								</div>
 							</div>
 						</form>
@@ -415,24 +415,36 @@
 									<button class="accordion-button" type="button"
 										data-bs-toggle="collapse" data-bs-target="#collapse1"
 										aria-expanded="true" aria-controls="collapse1">
-										<span class="mb-0 fw-bold text-start fs-1 text-1000">How
-											to contact with riders emergency?</span>
+										<span class="mb-0 fw-bold text-start fs-1 text-1000">사회적 거리두기로 인한 환불 관련</span>
 									</button>
 								</h2>
 								<div class="accordion-collapse collapse show" id="collapse1"
 									aria-labelledby="heading1" data-bs-parent="#accordionExample">
-									<div class="accordion-body bg-100">Leverage agile
-										frameworks to provide a robust synopsis for high level
-										overviews. Iterative approaches to corporate strategy foster
-										collaborative thinking to further the overall value
-										proposition. Organically grow the holistic world view of
-										disruptive innovation via workplace diversity and
-										empowerment.Bring to the table win-win survival strategies to
-										ensure proactive domination. At the end of the day, going
-										forward, a new normal that has evolved from generation X is on
-										the runway heading towards a streamlined cloud solution. User
-										generated content in real-time will have multiple touchpoints
-										for offshoring.</div>
+									<div class="accordion-body bg-100">네이버(주)는 통신판매의 당사자가 아니며, 환불 기준은 업체에서 직접 정한 규정으로 관리됩니다.
+
+
+
+그렇기 때문에 사회적 거리두기 정부지침에 따른 환불도 동일하게 업체의 규정대로 처리될 수 있는데요.
+
+
+
+네이버는 업체가 판매하는 것에 대해 임의로 환불할 수 없는 점 양해를 부탁드리며,
+
+사회적 거리두기로 인한 환불 협의가 필요할 경우 예약한 업체로 문의해 주시기 바랍니다.
+
+
+
+예약한 업체의 연락처는 예약 상세 내역의 '오시는길' 또는 '판매자연락처'에서 확인할 수 있습니다.
+
+
+
+아울러, 네이버페이로 결제한 예약 건에 적용된 업체의 취소 수수료 규정 또한
+
+예약 상세 내역의 '취소/환불 규정 안내'에서 확인이 가능합니다.
+
+※ 페이 미결제 건은 '취소/환불 규정 안내' 항목 없으나
+
+    업체의 규정에 따라 취소 시 취소 수수료가 발생할 수 있는 점 참고해 주세요.</div>
 								</div>
 							</div>
 							<div class="accordion-item mb-2">
@@ -440,15 +452,36 @@
 									<button class="accordion-button collapsed" type="button"
 										data-bs-toggle="collapse" data-bs-target="#collapse2"
 										aria-expanded="true" aria-controls="collapse2">
-										<span class="mb-0 fw-bold text-start fs-1 text-1000">App
-											installation failed, how to update system information?</span>
+										<span class="mb-0 fw-bold text-start fs-1 text-1000">예약/주문/간편주문 내역을 확인하고 싶어요</span>
 									</button>
 								</h2>
 								<div class="accordion-collapse collapse" id="collapse2"
 									aria-labelledby="heading2" data-bs-parent="#accordionExample">
-									<div class="accordion-body bg-100">You can issue either
-										partial or full refunds. There are no fees to refund a charge,
-										but the fees from the original charge are not returned.</div>
+									<div class="accordion-body bg-100">아래의 링크를 통해 예약/네이버 주문/간편주문 내역을 확인할 수 있습니다.
+
+예약한 네이버 아이디로 로그인해 주세요.
+
+
+
+[예약/주문 내역 확인 방법]
+
+
+
+1. '네이버 my플레이스' 또는 '네이버 마이플레이스' 검색 후 접속
+
+
+
+2.예약·주문 탭 클릭 > 예약 또는 주문 클릭('주문' 클릭 시 네이버 주문, 간편주문 확인 가능)
+
+
+
+3-1. 오늘(확정)/0일전(확정)/예약확인중(신청)으로 확인되는 건 클릭 → 예약 내역으로 이동
+
+
+
+3-2. 또는 페이지 중간의 '방문 00', '예약취소 00' 상태값 클릭 >
+
+확인하고자 하는 예약 건 클릭 → 예약 내역으로 이동</div>
 								</div>
 							</div>
 							<div class="accordion-item mb-2">
@@ -456,16 +489,25 @@
 									<button class="accordion-button collapsed" type="button"
 										data-bs-toggle="collapse" data-bs-target="#collapse3"
 										aria-expanded="true" aria-controls="collapse3">
-										<span class="mb-0 fw-bold text-start fs-1 text-1000">Website
-											reponse taking time, how to improve?</span>
+										<span class="mb-0 fw-bold text-start fs-1 text-1000">예약/주문 취소 방법</span>
 									</button>
 								</h2>
 								<div class="accordion-collapse collapse" id="collapse3"
 									aria-labelledby="heading3" data-bs-parent="#accordionExample">
-									<div class="accordion-body bg-100">Disputed payments
-										(also known as chargebacks) incur a $15.00 fee. If the
-										customer’s bank resolves the dispute in your favor, the fee is
-										fully refunded.</div>
+									<div class="accordion-body bg-100">취소할 예약/주문 건의 결제 상태를 아래에서 선택해 주세요.
+네이버페이로 결제한 예약 건은 업체의 환불 규정에 따라 취소 수수료가 발생될 수 있습니다.
+
+취소 전 예약 상세 내역의 '취소/환불 규정 안내'에서
+
+예약한 업체의 취소 수수료를 확인할 수 있으니 참고해 주세요.
+
+(페이 미결제 건은 '취소/환불 규정 안내' 항목 없음)
+
+
+
+■ 예약 상세 내역 접속 방법
+
+MY플레이스 > 예약·주문 > 예약 내역의 상품 이름 클릭</div>
 								</div>
 							</div>
 							<div class="accordion-item mb-2">
@@ -473,15 +515,27 @@
 									<button class="accordion-button collapsed" type="button"
 										data-bs-toggle="collapse" data-bs-target="#collapse4"
 										aria-expanded="true" aria-controls="collapse4">
-										<span class="mb-0 fw-bold text-start fs-1 text-1000">New
-											update fixed all bug and issues</span>
+										<span class="mb-0 fw-bold text-start fs-1 text-1000">부분 취소</span>
 									</button>
 								</h2>
 								<div class="accordion-collapse collapse" id="collapse4"
 									aria-labelledby="heading4" data-bs-parent="#accordionExample">
-									<div class="accordion-body bg-100">There are no
-										additional fees for using our mobile SDKs or to accept
-										payments using consumer wallets like Apple Pay or Google Pay.</div>
+									<div class="accordion-body bg-100">사업주가 부분 취소 기능을 사용하는 경우에만 부분 취소가 가능합니다.
+
+
+사업주가 부분 취소 기능을 사용하지 않는 경우 예약 내역는 예약취소 버튼만 노출됩니다.
+
+
+
+※ 무통장결제 예약 건은 부분 취소 불가
+
+※ 좌석을 선택한 뒤 예약한 건은 부분 취소 불가
+
+※ 사업자가 '숙박형'과 '시작-종료 시간선택형'으로 예약을 받을 경우,
+
+    메인 예약 내역에 대해 부분 취소가 불가(예, 2박 3일 중 1박만 취소 불가)하며,
+
+    옵션(인원추가 옵션, 마이크 대여 옵션 등)만 부분 취소가 가능합니다.</div>
 								</div>
 							</div>
 							<div class="accordion-item mb-2">
@@ -489,15 +543,26 @@
 									<button class="accordion-button collapsed" type="button"
 										data-bs-toggle="collapse" data-bs-target="#collapse5"
 										aria-expanded="true" aria-controls="collapse5">
-										<span class="mb-0 fw-bold text-start fs-1 text-1000">How
-											to contact with riders emergency?</span>
+										<span class="mb-0 fw-bold text-start fs-1 text-1000">네이버페이 결제 예약 건 환불 소요 기간</span>
 									</button>
 								</h2>
 								<div class="accordion-collapse collapse" id="collapse5"
 									aria-labelledby="heading5" data-bs-parent="#accordionExample">
-									<div class="accordion-body bg-100">There are no
-										additional fees for using our mobile SDKs or to accept
-										payments using consumer wallets like Apple Pay or Google Pay.</div>
+									<div class="accordion-body bg-100">네이버페이 결제수단에 따라 환불 소요 기간이 달라집니다. (영업일 기준)
+
+
+1) 신용카드: 3일~5일 이내 카드 승인 취소
+2) 체크카드: 2일 이내 카드 승인 취소   
+3) 계좌이체: 2일~3일
+
+4) 무통장 입금: 본인 계좌 2일
+
+                        환불정산액 즉시 
+5) 페이 포인트: 즉시
+
+
+
+추가로, 취소된 예약 건의 환불 소요 기간은 예약 상세 내역에서도 확인이 가능합니다. </div>
 								</div>
 							</div>
 						</div>
