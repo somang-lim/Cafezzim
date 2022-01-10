@@ -1,0 +1,265 @@
+여기다 저장해도 될지...
+
+SET SESSION FOREIGN_KEY_CHECKS=0;
+
+/* Drop Tables */
+
+DROP TABLE IF EXISTS cafe_searchname;
+DROP TABLE IF EXISTS member_cafe;
+DROP TABLE IF EXISTS menu;
+DROP TABLE IF EXISTS other_photo;
+DROP TABLE IF EXISTS payment;
+DROP TABLE IF EXISTS reserve_info;
+DROP TABLE IF EXISTS review;
+DROP TABLE IF EXISTS schedule;
+DROP TABLE IF EXISTS cafe_info;
+DROP TABLE IF EXISTS member;
+
+/* Create Tables */
+
+CREATE TABLE cafe_info
+(
+	cafe_id int NOT NULL AUTO_INCREMENT,
+	cafe_name varchar(30) NOT NULL,
+	cafe_address varchar(50) NOT NULL,
+	cafe_detail longtext,
+	title_photo varchar(200),
+	lat varchar(20),
+	lng varchar(20),
+	PRIMARY KEY (cafe_id),
+	UNIQUE (cafe_id),
+	UNIQUE (cafe_address)
+);
+
+
+CREATE TABLE cafe_searchname
+(
+	cafe_id int NOT NULL,
+	search_name varchar(100) NOT NULL
+);
+
+
+CREATE TABLE member
+(
+	member_id varchar(30) NOT NULL,
+	member_name varchar(15) NOT NULL,
+	password varchar(50) NOT NULL,
+	member_phone int NOT NULL,
+	member_email varchar(50) NOT NULL,
+	member_grade varchar(15) NOT NULL,
+	PRIMARY KEY (member_id),
+	UNIQUE (member_id),
+	UNIQUE (member_phone),
+	UNIQUE (member_email)
+);
+
+
+CREATE TABLE member_cafe
+(
+	cafe_id int NOT NULL,
+	member_id varchar(30) NOT NULL,
+	member_grade varchar(15) NOT NULL
+);
+
+
+CREATE TABLE menu
+(
+	menu_id int NOT NULL AUTO_INCREMENT,
+	cafe_id int NOT NULL,
+	menu_name varchar(30) NOT NULL,
+	menu_price int NOT NULL,
+	menu_type int NOT NULL,
+	PRIMARY KEY (reserve_id),
+	UNIQUE (reserve_id)
+);
+
+
+CREATE TABLE other_photo
+(
+	cafe_id int NOT NULL,
+	photo_name varchar(30) NOT NULL,
+	file_path varchar(100) NOT NULL
+);
+
+
+CREATE TABLE reserve_info
+(
+	reserve_id int NOT NULL AUTO_INCREMENT,
+	cafe_id int NOT NULL,
+	member_id varchar(30) NOT NULL,
+	isCancelled char NOT NULL,
+	reserve_date date NOT NULL,
+	reserve_time time NOT NULL,
+	reserve_name varchar(15) NOT NULL,
+	reserve_phone int NOT NULL,
+	reserve_4seats int,
+	reserve_2seats int,
+	request longtext,
+	payment_price int,
+	payment_method varchar(15),
+	payment_date date,
+	PRIMARY KEY (reserve_id),
+	UNIQUE (reserve_id)
+);
+
+
+
+CREATE TABLE review
+(
+	review_id int NOT NULL AUTO_INCREMENT,
+	cafe_id int NOT NULL,
+	member_id varchar(30) NOT NULL,
+	review_score int NOT NULL,
+	review_content longtext,
+	review_photo varchar(200),
+	PRIMARY KEY (menu_id),
+	UNIQUE (menu_id)
+);
+
+
+CREATE TABLE schedule
+(
+	cafe_id int NOT NULL,
+	cafe_date date NOT NULL,
+	cafe_time time NOT NULL,
+	4seats_avail int NOT NULL,
+	2seats_avail int NOT NULL
+);
+
+CREATE TABLE reserve_menu
+(
+	reserve_id int NOT NULL,
+	menu_id int NOT NULL
+);
+
+commit;
+
+/* Create Foreign Keys */
+
+ALTER TABLE cafe_searchname
+	ADD FOREIGN KEY (cafe_id)
+	REFERENCES cafe_info (cafe_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE member_cafe
+	ADD FOREIGN KEY (cafe_id)
+	REFERENCES cafe_info (cafe_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE menu
+	ADD FOREIGN KEY (cafe_id)
+	REFERENCES cafe_info (cafe_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE other_photo
+	ADD FOREIGN KEY (cafe_id)
+	REFERENCES cafe_info (cafe_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE reserve_info
+	ADD FOREIGN KEY (cafe_id)
+	REFERENCES cafe_info (cafe_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE review
+	ADD FOREIGN KEY (cafe_id)
+	REFERENCES cafe_info (cafe_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE schedule
+	ADD FOREIGN KEY (cafe_id)
+	REFERENCES cafe_info (cafe_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE member_cafe
+	ADD FOREIGN KEY (member_id)
+	REFERENCES member (member_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE reserve_info
+	ADD FOREIGN KEY (member_id)
+	REFERENCES member (member_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE review
+	ADD FOREIGN KEY (member_id)
+	REFERENCES member (member_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+ALTER TABLE reserve_menu
+	ADD FOREIGN KEY (reserve_id)
+	REFERENCES reserve_info (reserve_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE reserve_menu
+	ADD FOREIGN KEY (menu_id)
+	REFERENCES menu (menu_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+/* test값 입력 */
+INSERT INTO cafe_info (cafe_name,cafe_address,cafe_detail, title_photo, lat, lng) 
+VALUES ('git cafe','서울대입구 1', '뷰가 예쁜 카페입니다.','a.png','33.450701', '126.570667');
+
+INSERT INTO cafe_searchname (cafe_id, search_name) 
+VALUES (1, '서울대 입구'),(1, '서울대'),(3, '낙성대');
+
+INSERT INTO member (member_id, member_name, password, member_phone, member_email, member_grade) 
+VALUES ('git',	'홍길동', '!@#@#%#$%&',	01011111111,'git@email.com','master'), ('host1','일지매', '!#$@%^$%^@#',1012345678,	'global1@email.com','cafehost'),('user2',	'글로벌',	'*&^&%^$@%#!!',	1022222222,	'techteam2@email.com',	'customer');
+
+INSERT INTO member_cafe (cafe_id, member_id, member_grade) 
+VALUES (1, 'host1',	'cafehost'),(1	,'user2',	'customer'),(1,	'user3',	'customer'), (2,	'host2',	'cafehost');
+
+INSERT INTO menu (cafe_id, menu_name, menu_price, menu_type) 
+VALUES (1, 	'조각케이크',	5000,	1), (1,	'아이스 아메리카노',	4500,	2),(1,	'베이글',	3500,	1);
+
+INSERT INTO other_photo (cafe_id, photo_name, file_path) 
+VALUES (1,	"a.png",	'upload/a.png'), (1,	"b.png",	'upload/b.png'),(2,	"c.png",	'upload/c.png');
+
+INSERT INTO reserve_info (cafe_id, member_id, isCancelled, reserve_date, reserve_time, reserve_name, reserve_phone, reserve_4seats, reserve_2seats, request, payment_price, payment_method, payment_date) 
+VALUES (1,	'user2',	0,	'2022.01.31',	'11:00',	'홍길동', 01043267532,	1,	0,	'창가자리로', 10000, 'kakao', '2022.01.03'), 
+(2,	'user2',	1,	'2022.02.01',	'13:00',	'홍길동', '01095839133',	0,	1,	'뷰가 좋은 자리로', 20000, 'card', '2022.01.03'),
+(1,	'user3',	0,	'2022.02.02',	'15:00',	'일지매', '01085329643',	1,	2,	'넓은 자리로', 5000, 'card', '2022.01.04');
+
+INSERT INTO review (cafe_id, member_id, reivew_score, review_content, review_photo) 
+VALUES (1,	'user2',	5,	'커피가 맛있어요',	'a.png'), (1,	'user3',	4,	'뷰가 좋아요',	'b.png'),(2,	'user2',	3,	'따뜻해요',	'c.png');
+
+INSERT INTO schedule (cafe_id, cafe_date, cafe_time, 4seats_avail, 2seats_avail) 
+VALUES (1,'2021.1.23','11:00',4,3), (1,'2021.1.23','12:00',2,1),(1,'2021.1.23','13:00',2,0), (1,'2021.1.23','14:00',0,0), (1,'2021.1.23','15:00',1,4);
+
+INSERT INTO reserve_menu (reserve_id, menu_id) 
+VALUES (1, 1),(1, 2),(1, 3);
