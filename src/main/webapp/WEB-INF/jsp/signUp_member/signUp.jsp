@@ -13,7 +13,7 @@
 <!--    Document Title-->
 <!-- ===============================================-->
 <title>카페 예약 사이트</title>
-<%@include file="common.jsp" %>
+<%@include file="../common.jsp" %>
 <script src="js/signUp.js"></script>
 </head>
 
@@ -24,7 +24,7 @@
 	<!--    Main Content-->
 	<!-- ===============================================-->
 	
-	<%@include file="header.jsp" %>
+	<%@include file="../header.jsp" %>
 		<section class="">
 			<div class="container">
 	      <div class="row flex-center">
@@ -97,6 +97,6 @@
 	    </div><!-- <container>-->
 		</section>
 
-<%@include file="footer.jsp" %>
+<%@include file="../footer.jsp" %>
 </body>
 </html>
