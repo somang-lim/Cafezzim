@@ -40,7 +40,7 @@
 		<section class="py-3">
 			<div class="container">
 				<div class="row flex-center">
-					<div class="col-12 col-md-6">
+					<div class="col-12">
 	<!----------------------- 검색창 ------------------------------------------>
 						<form class="d-flex mb-3">
 							<div class="input-group my-3">
@@ -63,7 +63,7 @@
 									<div class="admin-member-desc">
 										<p>{회원이름}</p>
 										<p>회원ID:{회원ID}</p>
-										<a href="">회원 관리</a>
+										<a href="mypage_member">회원 관리</a>
 									</div>
 								</div>
 							</div>
@@ -77,7 +77,7 @@
 									<div class="admin-member-desc">
 										<p>{회원이름}</p>
 										<p>회원ID:{회원ID}</p>
-										<a href="">회원 관리</a>
+										<a href="mypage_member">회원 관리</a>
 									</div>
 								</div>
 							</div>
@@ -91,7 +91,7 @@
 									<div class="admin-member-desc">
 										<p>{회원이름}</p>
 										<p>회원ID:{회원ID}</p>
-										<a href="">회원 관리</a>
+										<a href="mypage_member">회원 관리</a>
 									</div>
 								</div>
 							</div>
