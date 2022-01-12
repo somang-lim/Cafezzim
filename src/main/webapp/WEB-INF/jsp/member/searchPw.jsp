@@ -1,7 +1,5 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -17,7 +15,7 @@
 <title>카페 예약 사이트</title>
 <%@include file="../common.jsp" %>
 <link href="css/signIn.css" rel="stylesheet" />
-<script src="js/sign.js"></script>
+
 </head>
 
 
@@ -31,31 +29,28 @@
 		
 		<section class="py-8" id="searchMain">
 			<main class="form-signin">
-			  <form name="frmSignIn" method="post">
+			  <form action="signIn">
 			    <img class="mb-2" src="./img/CafeZzim-logo.png" alt="" width="75" height="75">
-			    <h1 class="h3 mb-2 fw-normal">CafeZzim</h1>
-				
-					<div class="mt-2">
-	    			<c:if test="${empty message}">
-	    				<p>아이디와 비밀번호를 입력하세요.</p>
-	    			</c:if>
-			    	<c:if test="${message == 'failure'}">
-			    		<p style="color:red">아이디 또는 비밀번호가 일치하지 않습니다.</p>
-			  	  </c:if>
-	    		</div>
-	    		
+			    <h1 class="h3 mb-5 fw-normal">CafeZzim</h1>
+			
 			    <div class="form-floating my-3">
-			      <input type="text" class="form-control" id="member_id" name="member_id" placeholder="아이디" required="required" autocomplete="off">
+			      <input type="text" class="form-control" id="floatingInput" placeholder="아이디" required="required" autocomplete="off">
 			      <label for="floatingInput">아이디</label>
 			    </div>
+			    
+			     <div class="form-floating my-3">
+			      <input type="text" class="form-control" id="floatingInput" placeholder="이름" required="required" autocomplete="off">
+			      <label for="floatingInput">이름</label>
+			    </div>
+			    
 			    <div class="form-floating my-2">
-			      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required="required">
-			      <label for="floatingPassword">비밀번호</label>
+			      <input type="email" class="form-control" id="floatingInput" placeholder="이메일" required="required" autocomplete="off">
+			      <label for="floatingInput">이메일</label>
 			    </div>
 			
-			    <button type="button" class="w-100 btn btn-lg btn-primary my-3" id="btnSignIn">로그인</button>
+			    <button class="w-100 btn btn-lg btn-primary my-3" type="submit">비밀번호 찾기</button>
 			    <div class="text-center links">
-			    	<a href="searchId">아이디 찾기</a> | <a href="searchPw">비밀번호 찾기</a> | <a href="signUp">회원가입</a>
+			    	<a href="signIn">로그인</a> | <a href="searchId">아이디 찾기</a> | <a href="signUp">회원가입</a>
 			    </div>
 			    <p class="mt-5 mb-3 text-muted text-center">&copy; CafeZzim</p>
 			  </form>

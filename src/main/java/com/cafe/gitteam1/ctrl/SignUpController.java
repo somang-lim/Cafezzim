@@ -19,6 +19,12 @@ public class SignUpController {
 		mv.setViewName("signUp_member/id_check");
 		return mv;
 	}
+	@RequestMapping("/signUpResult")
+	public ModelAndView signUpResult() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("signUp_member/signUp_result");
+		return mv;
+	}
 	@RequestMapping("/mypage_member")
 	public ModelAndView mypageModify() {
 		ModelAndView mv = new ModelAndView();

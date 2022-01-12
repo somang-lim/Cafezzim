@@ -1,3 +1,4 @@
+
 package com.cafe.gitteam1.member;
 
 public class MemberVo {
@@ -7,7 +8,7 @@ public class MemberVo {
 	
 	private String password;
 	
-	private String member_phone;
+	private int member_phone;
 	
 	private String member_email;
 	
@@ -32,10 +33,10 @@ public class MemberVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getMember_phone() {
+	public int getMember_phone() {
 		return member_phone;
 	}
-	public void setMember_phone(String member_phone) {
+	public void setMember_phone(int member_phone) {
 		this.member_phone = member_phone;
 	}
 	public String getMember_email() {

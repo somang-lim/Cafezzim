@@ -33,7 +33,7 @@
 								alt="" width="72" height="72">
 						</div>
 						<div class="col-md-6">
-							<form class="needs-validation" novalidate>
+							<form class="needs-validation" novalidate id="frm_member" method="post">
 								<div class="row mb-3">
 									<h2>회원가입</h2>
 									<div class="col-6">
@@ -49,7 +49,7 @@
 									<div class="mb-3">
 										<label for="member_id">아이디</label>
 										<div class="input-group">
-											<input type="text" class="form-control" id="member_id" 
+											<input type="text" class="form-control" id="member_id" name="member_id" 
 											placeholder="" value="" required>
 											<button type="button" class="btn btn-primary" id="btnIdCheck">중복확인</button>										
 										</div> 
@@ -58,34 +58,34 @@
 									
 									<div class="mb-3">
 										<label for="password">비밀번호</label> 
-										<input type="password" class="form-control" id="password" 
+										<input type="password" class="form-control" id="password" name="password"
 										placeholder="" value="" required>
-										<div class="invalid-feedback"></div>
+										<div class="invalid-feedback">8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
 									</div>
 									<div class="mb-3">
 										<label for="password_check">비밀번호 확인</label> 
-										<input type="password" class="form-control" id="password_check" 
+										<input type="password" class="form-control" id="password_check" name="password_check"
 										placeholder="" value="" required>
 										<div class="invalid-feedback">비밀번호가 일치하지 않습니다.</div>
 									</div>
 									<div class="mb-3">
 										<label for="member_name">이름</label> 
-										<input type="text" class="form-control" id="member_name" 
+										<input type="text" class="form-control" id="member_name" name="member_name"
 										placeholder="" value="" required>
 										<div class="invalid-feedback">이름을 입력해주세요.</div>
 									</div>
 									<div class="mb-3">
 										<label for="member_phone">전화번호</label> 
-										<input type="tel" class="form-control" id="member_phone" 
+										<input type="tel" class="form-control" id="member_phone" name="member_phone"
 										placeholder="" value="" required>
 										<div class="invalid-feedback">(-)없이 전화번호를 입력해주세요.</div>
 									</div>
 								</div>
 								<div class="mb-3">
-									<label for="email">이메일 <span class="text-muted"></span></label>
-									<input type="email" class="form-control" id="email" 
+									<label for="member_email">이메일 <span class="text-muted"></span></label>
+									<input type="email" class="form-control" id="member_email" name="member_email"
 									placeholder="you@example.com" required>
-									<div class="invalid-feedback">이메일을 입력해주세요.</div>
+									<div class="invalid-feedback">이메일을 정확히 입력해주세요. 예시)you@example.com</div>
 								</div>
 
 								<div class="mb-2"></div>
