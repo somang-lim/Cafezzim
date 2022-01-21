@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +13,14 @@
 
 <title>테이블 예약 화면</title>
 <%@include file="../common.jsp" %>
+<%//오늘 날짜 구하기 
+String nowDate = request.getParameter("nowDate");
+Date tempNowDate = new Date(); 
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+//원하는 데이터 포맷 지정 
+nowDate = simpleDateFormat.format(tempNowDate); 
+
+%>
 </head>
 
 
@@ -18,36 +28,37 @@
 <%@include file="../header.jsp" %>
 
 <!-- ----------------------------------------------------------------------- -->
-<section class="pt-9 pb-1 ml-5" id="kind">
-	<h3 class="mx-10">{카페이름}예약 완료!</h3>
+<section class="py-0" id="kind">
+<div class="container-sm position-relative">
+	<div class="row flex-center pt-8">
+		<h3 class="mx-10">${param.cafe_name} - 예약 완료!</h3>
+</div>
+	</div>		
 </section>
 
-	<div class="card shadow-lg w-70 mb-5 mx-8 border-0 p-4">
-		<section class="py-5" id="location">
-			<div class="container-lg">
-				<div class="row align-items-center">
-					<!-- 예약리스트 -->
-					<div class="col-md-6 col-lg-3">
-						<a href="" class="location-item card shadow-lg mb-4 border-0">
-							<div class="location-img">
-								<img src="img/gallery/cafe-img01.jpg" class="img-fluid" alt="서울,경기">
-							</div>
-							<div class="location-desc pt-1 px-4">
-								<h4>행궁 81.2</h4>
-								<span class="text-muted">행리단길 370번길 36</span>
-								<br/>
-								<small class="text-muted">예약일자 2022-01-02</small>
-							</div>
-						</a>
+<section class="py-5" id="location">
+	<div class="container-lg">
+		<div class="row align-items-center">
+			<!-- 예약리스트 -->
+				<!-- <a href="" class="location-item card shadow-lg mb-4 border-0"> -->
+					<div class="location-img my-4">
+						<img src="../img/gallery/${param.photo }" class="img-fluid col-lg-8 col-12 w-100" alt="서울,경기">
 					</div>
-				</div>
-			</div>
-		</section>
+					<div class="location-desc pt-1 px-4">
+						<h4>${param.cafe_address }</h4>
+						<span class="text-muted">${param.cafe_name }</span>
+						<br/>
+						<small>예약일자 ${param.reserve_date }</small>
+					</div>
+			<!-- 	</a> -->
+		</div>
+		<div class="d-flex text-center">
+			<div class="col-6"><a href="/" class="form-control">다른예약하기</a></div>
+			<div class="col-6"><a href="mypageBookingList?nowDate=<%=nowDate %>&id=${sessionScope.member_id}" class="form-control btn-primary">예약내용 확인하기</a></div>
+		</div>
 	</div>
-<div class="d-flex justify-content-between w-70 mb-1 mx-8 border-0 p-4">
-	<input type="button" class="form-control btn-primary" value="다른예약하기">
-	<input type="button" class="form-control" value="예약내용 확인하기">
-</div>
+</section>
+
 <%@include file="../footer.jsp" %>
 </body>
 </html>

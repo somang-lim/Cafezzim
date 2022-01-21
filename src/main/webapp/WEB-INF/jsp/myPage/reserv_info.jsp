@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -37,10 +38,13 @@
 		<h3>상품 및 이용정보</h3>
 		<div class="row mb-4">
 			<div class="col-8">			
-				<p>날짜: {2021년 12월 31일 12시}</p>
+				<p>날짜: ${vo.rdate } ${vo.rtime }</p>
 			</div>
 			<div class="col-4">
-				<p class="text-right"><span class="badge rounded-pill bg-primary">예약 완료</span></p>					
+				<c:if test="${vo.isCancelled == 0}">
+					<p class="text-right"><span class="badge rounded-pill bg-primary">예약 완료</span></p>	
+				</c:if>
+				<!-- <p class="text-right"><span class="badge rounded-pill bg-primary">예약 완료</span></p>	 -->				
 			</div>
 		
 		</div>
@@ -49,9 +53,9 @@
 				<div class="img-wrap"><img src="img/myPage_cafe/cafe1.png" class="img-fluid"></div>					
 			</div>
 			<div class="col-8">			
-				<p class="mb-1">{카페이름}</p>
-				<p class="mb-1">예약번호: {예약번호}</p>
-				<p class="mb-1">인원수: {인원수}</p>
+				<p class="mb-1">${vo.cname}</p>
+				<p class="mb-1">예약번호: ${vo.rid}</p>
+				<p class="mb-1">인원수: <c:if test="${vo.r4seats > 0}">4인석 ${vo.r4seats }개</c:if><c:if test="${vo.r2seats > 0}">2인석 ${vo.r4seats }개</c:if></p>
 			</div>
 			
 		
@@ -59,7 +63,16 @@
 		
 		<h4>메뉴 정보</h4>
 		<ul class="list-group mb-3">
-      <li class="list-group-item d-flex justify-content-between lh-sm">
+			<c:forEach var="m" items="${menu}">
+			<li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">${m.name } X ${m.amt }</h6>
+          <small class="text-muted"></small>
+        </div>
+        <span class="text-muted">₩ ${m.price }</span>
+      </li>
+			</c:forEach>
+			<!-- <li class="list-group-item d-flex justify-content-between lh-sm">
         <div>
           <h6 class="my-0">카페모카</h6>
           <small class="text-muted">휘핑크림 많이</small>
@@ -73,31 +86,40 @@
           <small class="text-muted">얼음적게</small>
         </div>
         <span class="text-muted">₩ 5000</span>
-      </li>
+      </li> -->
     </ul>
 		<h4>결제 정보</h4>
 		<ul class="list-group mb-3">
       
-
+			<li class="list-group-item d-flex justify-content-between">
+        <span>결제 완료일</span>
+        <span>${vo.pdate}</span>
+      </li>
       <li class="list-group-item d-flex justify-content-between">
         <span>결제 방법</span>
-        <span>카드 결제</span>
+        <span>${vo.method }</span>
       </li>
       <li class="list-group-item d-flex justify-content-between">
         <span>결제(예정) 금액</span>
-        <strong>₩ 8300</strong>
+        <strong>₩ ${vo.price}</strong>
       </li>
+      
     </ul>
 		
-		<div class="row">
-			<div class="col-7"><a href="review" class="w-100 btn btn-lg btn-primary">후기 남기기</a></div>
-			<div class="col-5"><a href="" class="w-100 btn btn-lg btn-light">예약 취소 요청</a></div>
-		</div>
+		<form name="frm_book" method="post">
+			<input type="hidden" name="rid" value="${vo.rid}">
+			<div class="row">
+				<div class="col-7"><a href="review?rid=${vo.rid }" class="w-100 btn btn-lg btn-primary">후기 남기기</a></div>
+				<div class="col-5"><a href="" class="w-100 btn btn-lg btn-light">예약 취소 요청</a></div>
+			</div>
+		</form>
+		
 		
 	</div>
 
 </section>
 
 <%@include file="../footer.jsp" %>
+<script type="text/javascript" src="js/review.js"></script>
 </body>
 </html>

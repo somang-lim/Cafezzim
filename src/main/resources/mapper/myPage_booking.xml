@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.gitteam1.reserve.MyPageBookingListMapper">
+	<!-- 예약리스트 표시 -->
+	<select id="myPageBookingList" resultType="com.cafe.gitteam1.reserve.MyPageBookingListVo">
+		 SELECT ri.reserve_date as rdate, ci.cafe_address as caddress, ci.cafe_name as cname, ci.title_photo as img, reserve_id, isCancelled
+		 FROM reserve_info ri inner join cafe_info ci
+		 on ri.cafe_id = ci.cafe_id
+		 WHERE ri.member_id = #{id} and <![CDATA[ri.reserve_date >= #{nowDate}]]><!-- and  <![CDATA[ri.reserve_date >= #{nowDate}]]> #{today22} #{member_id} //////////////////////// -->
+		 ORDER BY reserve_date asc;
+	</select>
+	<!-- 이전 예약리스트 표시 -->
+	<select id="myPagePastBookingList" resultType="com.cafe.gitteam1.reserve.MyPageBookingListVo">
+		 SELECT ri.reserve_date as rdate, ci.cafe_address as caddress, ci.cafe_name as cname, ci.title_photo as img, reserve_id, isCancelled
+		  FROM reserve_info ri inner join cafe_info ci
+		  on ri.cafe_id = ci.cafe_id
+		 WHERE ri.member_id = #{id} and <![CDATA[ri.reserve_date <= #{nowDate}]]> <!--#{today22} #{member_id} ////////////////////////-->
+		 ORDER BY reserve_date asc;
+	</select>	
+	<!-- 예약내역 검색 -->
+	<select id="bookingListSearch" resultType="com.cafe.gitteam1.reserve.MyPageBookingListVo">
+		 SELECT ri.reserve_date as rdate, ci.cafe_address as caddress, ci.cafe_name as cname, ci.title_photo as img, reserve_id, isCancelled
+		  FROM reserve_info ri inner join cafe_info ci
+		  on ri.cafe_id = ci.cafe_id
+		 WHERE member_id = #{id} and ci.cafe_name like "%${_parameter}%"<!-- #{member_id} ////////////////////////-->
+		 ORDER BY reserve_date asc;
+	</select>
+	<update id="delClick">
+		update reserve_info set
+		isCancelled = 1
+		where reserve_id = #{rid}
+	</update>
+</mapper>

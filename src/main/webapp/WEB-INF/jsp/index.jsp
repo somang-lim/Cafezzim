@@ -12,8 +12,10 @@
 <!-- ===============================================-->
 <!--    Document Title-->
 <!-- ===============================================-->
-<title>카페 예약 사이트</title>
+<title>카페찜 | CafeZzim</title>
 <%@include file="common.jsp" %>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 
@@ -39,7 +41,7 @@
 								<!-- 위치 혹은 카페명으로 검색 -->
 								<div class="cafe-search-txt">
 									<label>위치 혹은 카페명</label>
-									<input type="text" name="findStr" placeholder="가고싶은 카페를 저희에게 알려주세요">
+									<input type="text" name="findStr" id="searchInput" placeholder="가고싶은 카페를 저희에게 알려주세요" required>
 								</div>
 								<!-- 카페 예약 날짜 검색 -->
 								<div class="cafe-search-date">
@@ -60,13 +62,11 @@
 							<img src="img/icons/coffee-cup-thin.png" alt="카페 컵 이미지" class="multiply">
 						</div>
 						<h1 class="mb-4 display-3 fw-bold lh-sm">
-							어떤 커피를 마실까? <br class="d-block d-lg-none d-xl-block" />modern
-							lifestyle
+							어떤 커피를 마실까?
 						</h1>
+						<h3 class="mb-4 display-6 fw-bold lh-sm">카페찜에서 검색 해보세요</h3>
 						<p class="mt-3 mb-4 fs-1 text-white">
-							Increase productivity with a simple to-do app. app for <br
-								class="d-none d-lg-block" />managing your personal budgets.
-						</p>
+						카페찜은 국내 최다 카페 및 예약 관련 DB를 <br class="d-none d-lg-block" />보유하고 있습니다.</p>
 					</div>
 				</div>
 			</div>
@@ -89,10 +89,11 @@
 							내 자리를 찜하는 <br class="d-block d-lg-none d-xl-block" />가장 스마트한 방법
 						</h1>
 						<p class="mt-3 mb-4 fs-1">
-							Increase productivity with a simple to-do app. app for <br
-								class="d-none d-lg-block" />managing your personal budgets.
+							다양한 국내외 여가 상품을 쉽고 빠르게 검색, <br class="d-none d-lg-block" />
+							예약할 수 있으며 고객 편의 서비스를 통해 <br class="d-none d-lg-block" />
+							안심하고 즐기는 여가 환경을 제공합니다.
 						</p>
-						<a class="btn btn-lg btn-primary rounded-pill hover-top" href="#"
+						<a class="btn btn-lg btn-primary rounded-pill hover-top" href="signUp"
 							role="button">가입 하기</a><a class="btn btn-link ps-md-4"
 							href="#" role="button"> 카페 찜 이란?</a>
 					</div>
@@ -108,7 +109,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 mx-auto align-items-center text-center">
-						<p class="mb-4">Trusted by companies like</p>
+						<p class="mb-4">이미 많은 파트너사와 함께 하고 있습니다.</p>
 					</div>
 				</div>
 				<div
@@ -204,10 +205,9 @@
 					<div
 						class="col-sm-10 col-md-6 col-lg-6 text-center text-md-start offset-md-1">
 						<h6 class="fw-bold fs-4 display-3 lh-sm">
-							Meet Client Satisfaction <br />by using product
+							카페찜에서 예약하신 <br />회원님들의 실제 후기입니다.
 						</h6>
-						<p class="my-4 pe-xl-5">The rise of mobile devices transforms
-							the way we consume.Elevant channels such as Facebook.</p>
+						<p class="my-4 pe-xl-5">많은 분들이 사용해보시고 남겨주신 소중한 후기들을 확인 해보세요.</p>
 						<div class="carousel slide" id="carouselExampleDark"
 							data-bs-ride="carousel">
 							<div class="carousel-inner">
@@ -244,23 +244,16 @@
                           <path
 													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
                         </svg>
-											<h5 class="my-4 fw-bold lh-sm">User friendly &amp;
-												Customizable</h5>
-											<p class="mb-0 text-center text-md-start">Bring to the
-												table win-win survival strategies to ensure proactive
-												domination. At the end of the day, going forward, a new
-												normal that has evolved from generation X is on the runway
-												heading towards a streamlined cloud solution. User generated
-												content in real-time will have multiple touchpoints for
-												offshoring.</p>
+											<h5 class="my-4 fw-bold lh-sm">와 저만 몰랐나요??</h5>
+											<p class="mb-0 text-center text-md-start">친구 추천으로 사이트 알게 되었는데 세상 편해졌네요 ㅎㅎ 여자친구랑 커피한잔 하려고 카페 찾아보다가 평소 가고 싶었던 카페가 검색되길래 봤더니 시간별로 자리까지 예약되서 너무 편하게 이용하고 왔네요 ㅎㅎ 이런 사이트 만들어준 개발자님들 넘 감사해요 적게 일하고 많이 버세요~~</p>
 										</div>
 										<div class="col-xl-6 pt-4 d-flex d-sm-block flex-center">
 											<div class="d-flex align-items-md-center">
 												<img class="img-fluid me-4 me-md-3 me-lg-4"
 													src="img/gallery/user.png" width="100" alt="" />
 												<div class="w-lg-50 my-3">
-													<h5 class="mb-0 fw-bold">Zoltan Nemeth</h5>
-													<p class="fw-normal mb-0">CEO of Pixer Lab</p>
+													<h5 class="mb-0 fw-bold">길태수 님</h5>
+													<p class="fw-normal mb-0">작사가</p>
 												</div>
 											</div>
 										</div>
@@ -299,23 +292,16 @@
                           <path
 													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
                         </svg>
-											<h5 class="my-4 fw-bold lh-sm">User friendly &amp;
-												Customizable</h5>
-											<p class="mb-0 text-center text-md-start">Bring to the
-												table win-win survival strategies to ensure proactive
-												domination. At the end of the day, going forward, a new
-												normal that has evolved from generation X is on the runway
-												heading towards a streamlined cloud solution. User generated
-												content in real-time will have multiple touchpoints for
-												offshoring.</p>
+											<h5 class="my-4 fw-bold lh-sm">카페찜 추천합니다~!!</h5>
+											<p class="mb-0 text-center text-md-start">최근에 새로운 공부를 시작해서 카페갈 일이 잦아졌는데 카페 예약이 가능한 사이트가 생겨서 너무 좋았습니다. 거리 순 카페 검색이라던지 카페 내부 사진을 미리 볼 수 있어서 카페를 미리 선택하기가 수월했고 이용후 후기를 남길 수 있고 또 다른 사람의 후기를 통해서 예약팁을 얻어갈 수 있어서 좋네요. 찜기능으로 카페를 여러번 검색하지 않아도 되서 편리했고 여러군데의 카페를 이용해도 10번 이용 시 할인이 된다는 점도 맘에 들었습니다! 앞으로도 자주 애용할게요~!!</p>
 										</div>
 										<div class="col-xl-6 pt-4 d-flex d-sm-block flex-center">
 											<div class="d-flex align-items-md-center">
 												<img class="img-fluid me-4 me-md-3 me-lg-4"
 													src="img/gallery/user-1.png" width="100" alt="" />
 												<div class="w-lg-50 my-3">
-													<h5 class="mb-0 fw-bold">Jhon Doe</h5>
-													<p class="fw-normal mb-0">Web Developer</p>
+													<h5 class="mb-0 fw-bold">박수혜</h5>
+													<p class="fw-normal mb-0">웹 개발자</p>
 												</div>
 											</div>
 										</div>

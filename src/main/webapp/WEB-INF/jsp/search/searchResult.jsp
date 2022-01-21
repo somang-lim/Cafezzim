@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,12 +13,19 @@
 <!-- ===============================================-->
 <!--    Document Title-->
 <!-- ===============================================-->
-<title>카페 예약 사이트</title>
+<title>${ find } 검색 결과 | CafeZzim</title>
 <%@include file="../common.jsp" %>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
 </head>
 
 
 <body>
+<%
+String date = request.getParameter("date");
+%>
 
 	<!-- ===============================================-->
 	<!--    Main Content-->
@@ -34,22 +42,25 @@
 					
 					<!-- 카페 검색 form 부분 -->
 					<div class="col-lg-10 col-xl-6">
-						<form name="frm_search" action="" method="post">
+						<form name="frm_search" action="search" method="post">
 							<div class="cafe-find-wrap">
 								<!-- 위치 혹은 카페명으로 검색 -->
 								<div class="cafe-search-txt">
 									<label>위치 혹은 카페명</label>
-									<input type="text" name="findStr" placeholder="가고싶은 카페를 저희에게 알려주세요">
+									<input type="text" name="findStr" id="searchInput" placeholder="가고싶은 카페를 저희에게 알려주세요" value="${find }" required>
 								</div>
 								<!-- 카페 예약 날짜 검색 -->
 								<div class="cafe-search-date">
 									<label>예약 날짜</label>
-									<input type="text" name="date" id="datePicker" placeholder="날짜를 알려주세요">
+									<input type="text" name="date" id="datePicker" value="<%=date %>" placeholder="날짜를 알려주세요">
 								</div>
 								<div class="cafe-search-btn text-center">
-									<button type="button" class="btn btn-lg btn-primary rounded-pill hover-top"><i class="fas fa-search"></i> 검색</button>
+									<button type="submit" class="btn btn-lg btn-primary rounded-pill hover-top"><i class="fas fa-search"></i> 검색</button>
 								</div>
 							</div>
+							<input type="hidden" name="sortBy" value="">
+							<input type="hidden" name="centerLat" value="">
+							<input type="hidden" name="centerLng" value="">
 						</form>
 					</div>
 				</div>
@@ -57,32 +68,26 @@
 			</div>
 		</section>
 		
-		<section class="py-5">
+		<section class="py-5" id="srchResult">
 			<div class="container-sm position-relative">
 				
-				
-				<div class="row">
-					<div class="col-12">
-						<h2>서울대입구</h2>
-						<p>서울대입구에 위치한 카페 100개가 검색되었습니다.</p>
-					</div>
-				</div>
-				<!-- //end row -->
+				<h2>${ find } 검색 결과</h2>
+				<p>${ find } 카페 ${fn:length(list) }개가 검색되었습니다.</p>
 				
 				<div class="row justify-content-between mb-3">
 					<div class="col-6 col-md-3">
-						<select class="form-select mb-3" aria-label=".form-select example">
-	            <option selected="">정렬기준</option>
-	            <option value="1">추천 순</option>
-	            <option value="2">후기 많은 순</option>
-	            <option value="3">찜 많은 순</option>
-	            <option value="3">거리 순</option>
+						<select class="form-select mb-3" aria-label=".form-select example" id="sort-choose">
+	            <option selected>정렬기준</option>
+	            <option value="recommend">추천 순</option>
+	            <option value="rating">평점 높은 순</option>
+	            <option value="like">후기 많은 순</option>
+	            <option value="distance">거리 순</option>
 	          </select>
 					</div>
 					
 					<div class="col-6 col-md-3">
 						<div class="text-right">
-							<a href="map" class="btn btn-lg btn-light rounded-pill">
+							<a href="map?findStr=${find }&date=<%=date %>" class="btn btn-lg btn-light rounded-pill">
 								<i class="fas fa-map-marker-alt"></i>
 		          	<span class="fz-13">지도에서 보기</span>
 		          </a>
@@ -92,95 +97,27 @@
 				</div>
 				<!-- //end row -->
 				
-				<div class="row">
-				
-					<!-- 검색 결과 -->
-					<div class="col-xl-6">
-					
-						<a href="view" class="search-item card shadow-lg mb-4 border-0">
-							<div class="d-flex">
-								<div class="search-item-img">
-									<div class="img-wrap">
-										<img src="img/gallery/cafe-img01.jpg" class="img-fluid" alt="서울,경기">
+				<div class="srchResults row">
+					<c:forEach var="vo" items="${list}">
+					<div class="srchResult-item col-xl-6" data-lat="${vo.lat }" data-lng="${vo.lng }">
+						<a href="view?id=${vo.cid}" class="search-item card shadow-lg mb-4 border-0">
+								<div class="d-flex">
+									<div class="search-item-img">
+										<div class="img-wrap">
+											<img src="../img/gallery/${vo.thumb }" class="img-fluid" alt="서울,경기">
+										</div>
+									</div>
+									<div class="search-item-desc py-3 px-3">
+										<p class="fw-medium fz-14">${vo.name}</p>
+										<p class="fz-13">${vo.address } <br/> ${vo.distance * 1000}m</p>
+										<p class="fz-12"><i class="fas fa-star"></i> ${vo.rating } (${vo.rcnt})</p>
 									</div>
 								</div>
-								<div class="search-item-desc py-3 px-3">
-									<p class="fw-medium fz-14">랭스터디카페 서울대입구역점</p>
-									<p class="fz-13">서울 관악구 쑥고개로 125 지하1층</p>
-									<p class="fz-12"><i class="fas fa-star"></i> 4.8 (100)</p>
-								</div>
-							</div>
-							
-						</a>
-						
+								
+							</a>
 					</div>
-					
-					<!-- 검색 결과 -->
-					<div class="col-xl-6">
-					
-						<a href="view" class="search-item card shadow-lg mb-4 border-0">
-							<div class="d-flex">
-								<div class="search-item-img">
-									<div class="img-wrap">
-										<img src="img/gallery/cafe-img02.jpg" class="img-fluid" alt="서울,경기">
-									</div>
-								</div>
-								<div class="search-item-desc py-3 px-3">
-									<p class="fw-medium fz-14">고요서울</p>
-									<p class="fz-13">서울 관악구 남부순환로226길 31 2층</p>
-									<p class="fz-12"><i class="fas fa-star"></i> 4.8 (100)</p>
-								</div>
-							</div>
-							
-						</a>
-						
-					</div>
-					
-					<!-- 검색 결과 -->
-					<div class="col-xl-6">
-					
-						<a href="view" class="search-item card shadow-lg mb-4 border-0">
-							<div class="d-flex">
-								<div class="search-item-img">
-									<div class="img-wrap">
-										<img src="img/gallery/cafe-img03.jpg" class="img-fluid" alt="서울,경기">
-									</div>
-								</div>
-								<div class="search-item-desc py-3 px-3">
-									<p class="fw-medium fz-14">그릭데이 서울대점</p>
-									<p class="fz-13">서울 관악구 관악로 168</p>
-									<p class="fz-12"><i class="fas fa-star"></i> 4.8 (100)</p>
-								</div>
-							</div>
-							
-						</a>
-						
-					</div>
-					
-					<!-- 검색 결과 -->
-					<div class="col-xl-6">
-					
-						<a href="view" class="search-item card shadow-lg mb-4 border-0">
-							<div class="d-flex">
-								<div class="search-item-img">
-									<div class="img-wrap">
-										<img src="img/gallery/cafe-img04.jpg" class="img-fluid" alt="서울,경기">
-									</div>
-								</div>
-								<div class="search-item-desc py-3 px-3">
-									<p class="fw-medium fz-14">달달첼베이커리</p>
-									<p class="fz-13">서울 관악구 청룡7길 47 1층</p>
-									<p class="fz-12"><i class="fas fa-star"></i> 4.8 (100)</p>
-								</div>
-							</div>
-							
-						</a>
-						
-					</div>
-					
+					</c:forEach>
 				</div>
-					
-					
 				
 			</div>
 			<!-- //end container -->
@@ -189,5 +126,6 @@
 
 
 <%@include file="../footer.jsp" %>
+<script type="text/javascript" src="js/search.js"></script>
 </body>
 </html>

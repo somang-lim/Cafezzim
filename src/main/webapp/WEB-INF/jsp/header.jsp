@@ -44,8 +44,9 @@
 	          </a>
 	          <c:if test="${sessionScope.grade eq 'customer'}">
 		          <ul class="dropdown-menu text-small mr-5" aria-labelledby="dropdownUser2">
+		          	<li><p class="dropdown-header">${sessionScope.name}님 반갑습니다.</p></li>
 		            <li><a class="dropdown-item" href="mypage_member">마이페이지</a></li>
-		            <li><a class="dropdown-item" href="mypageBookingList">예약확인</a></li>
+		            <li><a class="dropdown-item" href="mypageBookingList?id=${sessionScope.member_id}">예약확인</a></li>
 		            <li><hr class="dropdown-divider"></li>
 		            <li><a class="dropdown-item" href="signOut">로그아웃</a></li>
 		          </ul>
@@ -53,8 +54,9 @@
 	          
  	          <c:if test="${sessionScope.grade eq 'cafehost'}">
 		          <ul class="dropdown-menu text-small mr-5" aria-labelledby="dropdownUser2">
+			          <li><p class="dropdown-header">${sessionScope.name}님 반갑습니다.</p></li>
 		            <li><a class="dropdown-item" href="mypage_member">마이페이지</a></li>
-		            <li><a class="dropdown-item" href="mypageBookingList">예약확인</a></li>
+		            <li><a class="dropdown-item" href="mypageBookingList?id=${sessionScope.member_id}">예약확인</a></li>
  		            <li><a class="dropdown-item" href="cafemanage">카페정보</a></li>
 		            <li><hr class="dropdown-divider"></li>
 		            <li><a class="dropdown-item" href="signOut">로그아웃</a></li>
@@ -63,6 +65,7 @@
 
  	          <c:if test="${sessionScope.grade eq 'master'}">
 		          <ul class="dropdown-menu text-small mr-5" aria-labelledby="dropdownUser2">
+		          	<li><p class="dropdown-header">${sessionScope.name}님 반갑습니다.</p></li>
 		            <li><a class="dropdown-item" href="cafemanage">관리페이지</a></li>
 		            <li><a class="dropdown-item" href="mypage_admin">회원관리</a></li>
 		            <li><hr class="dropdown-divider"></li>

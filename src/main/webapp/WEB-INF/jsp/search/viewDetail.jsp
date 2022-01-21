@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,7 +13,7 @@
 <!-- ===============================================-->
 <!--    Document Title-->
 <!-- ===============================================-->
-<title>카페 예약 사이트</title>
+<title>${vo.name} | CafeZzim</title>
 <%@include file="../common.jsp" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
@@ -39,17 +40,17 @@
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
 				      <div>
-								<img src="img/gallery/cafe-img01.jpg" class="img-fluid">
+								<img src="img/gallery/${vo.thumb }" class="img-fluid">
 							</div>
 				    </div>
 				    <div class="carousel-item">
 				      <div>
-								<img src="img/gallery/cafe-img01.jpg" class="img-fluid">
+								<img src="img/gallery/${vo.thumb }" class="img-fluid">
 							</div>
 				    </div>
 				    <div class="carousel-item">
 				      <div>
-								<img src="img/gallery/cafe-img01.jpg" class="img-fluid">
+								<img src="img/gallery/${vo.thumb }" class="img-fluid">
 							</div>
 				    </div>
 				  </div>
@@ -69,19 +70,25 @@
 		<section id="viewTitle" class="py-0">
 			<div class="container">
 
-				<p class="display-5">랭스터디카페 서울대입구역점</p>
-				<p class="">서울 관악구 쑥고개로 125 지하1층</p>
-				<p class=""><i class="fas fa-star"></i> 4.8 (100)</p>
+				<p class="display-5">${vo.name}</p>
+				<p class="">${vo.address }</p>
+				<p class=""><i class="fas fa-star"></i>${vo.rating } (${fn:length(review) })</p>
 
-				<div class="row">
-					<div class="col-10">
-						<a href="order" class="btn btn-lg btn-primary w-100 mx-0 mb-2">예약하기</a>
+				<div class="d-flex">
+					<div class="col-5">
+						<a href="order?id=${vo.cid}" class="btn btn-lg btn-light w-100 mx-0 mb-2">자리 찜하기</a>
+						
 						<!-- <button type="button"
 							class="btn btn-lg btn-primary w-100 mx-0 mb-2">예약하기</button> -->
 					</div>
+					<div class="col-5">
+						<a href="order?id=${vo.cid}&pay=1" class="btn btn-lg btn-primary w-100 mx-0 mb-2">결제하기</a>
+					</div>
 					<div class="col-2">
-						<button type="button" class="btn w-100 mx-0 mb-2">
-							<i class="far fa-heart"></i>
+						<input type="hidden" id="mid" value="${sessionScope.member_id }">
+						<input type="hidden" id="cid" value="${vo.cid }">
+						<button type="button" class="btn w-100 mx-0 mb-2" id="btnToggleZzim">
+							<i class="${className} fa-heart text-danger" id="btnToggleHeart"></i>
 						</button>
 					</div>
 				</div>
@@ -107,69 +114,107 @@
 
 			<div id="viewDetailContent">
 				<div id="info" class="panel-item py-5">
-					못할 아름답고 방지하는 뼈 것이다. 거친 많이 모래뿐일 속에서 기관과 황금시대의 만천하의 있으며, 사막이다. 위하여 수
-					가치를 길을 얼음이 청춘의 커다란 우리는 사막이다. 피부가 동력은 없는 가치를 자신과 심장의 것이다. 그러므로 별과
-					청춘을 역사를 품고 인생의 석가는 못할 봄바람이다. 위하여서 평화스러운 같이 귀는 못할 어디 많이 구하기 끓는다. 그들을
-					피가 사라지지 앞이 착목한는 그들의 말이다. 어디 듣기만 가슴이 실현에 커다란 두손을 내는 많이 말이다. 아름답고 듣기만
-					피부가 인간에 하여도 인간의 운다.
-
-					<div>
-						<iframe
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.411174236135!2d126.95111784896119!3d37.480590360777114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f89073e4383%3A0xb967a35b1ca07ae7!2z7Iqk7YOA67KF7IqkIOyEnOyauOuMgOyeheq1rOyXreygkA!5e0!3m2!1sko!2skr!4v1641449383550!5m2!1sko!2skr"
-							height="320" style="border: 0; width: 100%;" allowfullscreen=""
-							loading="lazy"></iframe>
-					</div>
+					<div>${vo.detail }</div>
+					<div id="map" class="mt-4"
+						style="border: 0; width: 100%; height: 320px;"></div>
+					<form name="frm_location">
+						<input type="hidden" name="cname" value="${vo.name }">
+						<input type="hidden" name="lat" value="${vo.lat }">
+						<input type="hidden" name="lng" value="${vo.lng }">
+					</form>
+					<script>
+					var mapname = document.frm_location.cname.value;
+					var maplat = document.frm_location.lat.value;
+					var maplng = document.frm_location.lng.value;
+					var HOME_PATH = window.HOME_PATH || '.';
+	
+					var cityhall = new naver.maps.LatLng(maplat, maplng),
+					    map = new naver.maps.Map('map', {
+					        center: cityhall.destinationPoint(0, 0),
+					        zoom: 18
+					    }),
+					    marker = new naver.maps.Marker({
+					        map: map,
+					        position: cityhall
+					    });
+	
+					var contentString = [
+					        '<div style="width:200px;padding:10px;">',
+					        '	<p>',mapname,
+					        '',
+					        '',
+					        '',
+					        '',
+					        '	</p>',
+					        '</div>'
+					    ].join('');
+	
+					var infowindow = new naver.maps.InfoWindow({
+					    content: contentString
+					});
+	
+					naver.maps.Event.addListener(marker, "click", function(e) {
+					    if (infowindow.getMap()) {
+					        infowindow.close();
+					    } else {
+					        infowindow.open(map, marker);
+					    }
+					});
+	
+					infowindow.open(map, marker);
+					</script>
 				</div>
 				<div id="menu" class="panel-item py-5">
+				
 					<h3>음료 메뉴</h3>
+					<c:forEach var="m" items="${menu}" varStatus="status">
+					<c:if test="${m.type eq 2}">
 					<div class="mb-3 form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
-						<label class="form-check-label" for="exampleCheck1">아이스
-							아메리카노</label>
-
+						<%-- <input type="checkbox" class="form-check-input" id="drink${status.count}" value="${m.name }"> --%>
+						<label class="form-check-label" for="drink${status.count}">${m.name }</label>
+						<span>${m.price } <i class="fas fa-won-sign"></i></span>
 					</div>
-					<div class="mb-3 form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck2">
-						<label class="form-check-label" for="exampleCheck2">카페라떼</label>
-
-					</div>
-
+					</c:if>
+					</c:forEach>
 					<h3>메인 메뉴</h3>
+					<c:forEach var="m" items="${menu}" varStatus="status">
+					<c:if test="${m.type eq 1}">
 					<div class="mb-3 form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck3">
-						<label class="form-check-label" for="exampleCheck3">팬케이크</label>
-
+						<%-- <input type="checkbox" class="form-check-input" id="dessert${status.count}" value="${m.name }"> --%>
+						<label class="form-check-label" for="dessert${status.count}">${m.name }</label>
+						<span>${m.price } <i class="fas fa-won-sign"></i></span>
 					</div>
-					<div class="mb-3 form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck4">
-						<label class="form-check-label" for="exampleCheck4">팥빙수</label>
-
-					</div>
+					</c:if>
+					</c:forEach>
 				</div>
 
 				<div id="review" class="panel-item py-5">
-					<p class="display-6">총점 3.5</p>
+					<p class="display-6">총점 ${vo.rating }</p>
+					
+					<c:forEach var="rv" items="${review}">
+					<!-- review 시작 -->
 					<div class="row">
 						<div class="col-2">
-							<img src="img/gallery/cafe-review01.jpg" class="img-fluid">
+							<img src="upload/${rv.photo }" class="img-fluid">
 						</div>
 						<div class="col-10">
 							<div class="row">
 								<div class="col-8">
 									<img src="img/gallery/profile-none.png"
-										class="img-fluid img-profile "> user1
+										class="img-fluid img-profile "> ${rv.mid }
 								</div>
 								<div class="col-4">
 									<p class="">
-										<i class="fas fa-star"></i> 4.8 (100)
+										<i class="fas fa-star"></i> ${rv.score }
 									</p>
 								</div>
 							</div>
-
-
-							<p>커피가 맛있어요</p>
+							<p>${rv.content}</p>
 						</div>
 					</div>
+					<!-- //review 끝 -->
+					</c:forEach>
+					
 
 				</div>
 			</div>
@@ -181,7 +226,7 @@
 
 
 <%@include file="../footer.jsp" %>
-
+<script src="js/view.js"></script>
 
 </body>
 </html>

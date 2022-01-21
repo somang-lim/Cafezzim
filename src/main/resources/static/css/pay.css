@@ -21,7 +21,7 @@
 	position:relative;
 	top:1px;
 }
-#order_count{
+.count{
 	border: 0px solid white;
 	text-align:center;
 }

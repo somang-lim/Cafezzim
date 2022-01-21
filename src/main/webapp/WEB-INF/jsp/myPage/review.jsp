@@ -9,8 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<title>테이블 예약 화면</title>
+<title>리뷰작성 | CafeZzim</title>
 <%@include file="../common.jsp" %>
+<link rel="stylesheet" href="css/review.css">
 </head>
 
 
@@ -35,52 +36,47 @@
 
 	<div class="container">
 		<div class="text-center">
-			<h5 class="">{카페이름} 에서의 시간은 어땠나요?</h5>
-			<p>날짜: {2021년 12월 31일 12시}</p>
+			<h5 class="">${vo.cname} 에서의 시간은 어땠나요?</h5>
+			<p>날짜: ${vo.rdate } ${vo.rtime }</p>
 		</div>
 		
-		<form action="" method="post">
-		
-			<div class="display-2 text-center mb-4">
-				<i class="fas fa-star"></i>
-				<i class="fas fa-star"></i>
-				<i class="fas fa-star"></i>
-				<i class="fas fa-star"></i>
-				<i class="fas fa-star"></i>
+		<form name="frm_review" action="writeReview" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="cid" value="${vo.cid }">
+			<input type="hidden" name="mid" value="${vo.mid }">
+			<div class="text-center mb-4">
+				<span class="star">
+				  ★★★★★
+				  <span>★★★★★</span>
+				  <input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="5">
+				</span>
 			</div>
 			<div class="input-group mb-3">
          <span class="input-group-text">내용</span>
-         <textarea class="form-control" aria-label="With textarea"></textarea>
+         <textarea name="content" class="form-control" aria-label="With textarea"></textarea>
        </div>
        <div class="mb-5">
          <label class="form-label" for="customFile">사진 업로드</label>
-         <input type="file" class="form-control" id="customFile">
+         <input type="file" name="file" class="form-control" id="customFile">
        </div>
 		</form>
 		
 		<h4>메뉴 정보</h4>
 		<ul class="list-group mb-3">
-      <li class="list-group-item d-flex justify-content-between lh-sm">
+      <c:forEach var="m" items="${menu}">
+			<li class="list-group-item d-flex justify-content-between lh-sm">
         <div>
-          <h6 class="my-0">카페모카</h6>
-          <small class="text-muted">휘핑크림 많이</small>
+          <h6 class="my-0">${m.name } X ${m.amt }</h6>
+          <small class="text-muted"></small>
         </div>
-        <span class="text-muted">₩ 8300</span>
+        <span class="text-muted">₩ ${m.price }</span>
       </li>
-     
-      <li class="list-group-item d-flex justify-content-between lh-sm">
-        <div>
-          <h6 class="my-0">아메리카노(ice)</h6>
-          <small class="text-muted">얼음적게</small>
-        </div>
-        <span class="text-muted">₩ 5000</span>
-      </li>
+			</c:forEach>
     </ul>
 		
 		
 		<div class="row">
-			<div class="col-7"><a href="review" class="w-100 btn btn-lg btn-primary">후기 작성 완료</a></div>
-			<div class="col-5"><a href="" class="w-100 btn btn-lg btn-light">후기 작성 취소</a></div>
+			<div class="col-7"><button class="w-100 btn btn-lg btn-primary" id="reviewSaveBtn">후기 작성 완료</button></div>
+			<div class="col-5"><button class="w-100 btn btn-lg btn-light" id="reviewCancelBtn">후기 작성 취소</button></div>
 		</div>
 		
 	</div>
@@ -88,5 +84,6 @@
 </section>
 
 <%@include file="../footer.jsp" %>
+<script type="text/javascript" src="js/review.js"></script>
 </body>
 </html>
