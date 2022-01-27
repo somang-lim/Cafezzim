@@ -110,17 +110,20 @@ public class SignUpController {
 		mv.setViewName("myPage_member/mypage_memberView");
 		return mv;
 	}  
-	
 	@RequestMapping("mypage_admin")
-	public ModelAndView mypageAdmin(HttpServletRequest req) {
+	public ModelAndView mypageAdmin(HttpServletRequest req, HttpSession session) {		
 		ModelAndView mv = new ModelAndView();
 		findStr = req.getParameter("findStr");
 		List<MemberVo> list = service.searchMember(findStr);
-		mv.addObject("list",list);
-		mv.setViewName("myPage_member/mypage_admin");
-		return mv;
+		mv.addObject("list",list);	
+
+		if(session.getAttribute("grade").equals("master")) {								
+			mv.setViewName("myPage_member/mypage_admin");
+			
+		} else {
+			mv.setViewName("redirect:/");
+		}return mv;
 	}
-	
 	@RequestMapping("memberModify")
 	public ModelAndView memberModify(MemberVo vo) {
 		ModelAndView mv = new ModelAndView();
@@ -146,6 +149,19 @@ public class SignUpController {
 		session.invalidate();
 		/* mService.signOut(session); */
 		mv.setViewName("redirect:/");
+		return mv;
+	}
+	@RequestMapping("masterDelete")
+	public ModelAndView masterDelete(MemberVo vo) {
+		ModelAndView mv = new ModelAndView();
+		b = service.memberCancel(vo);
+		if(b) {
+			msg="회원이 탈퇴되었습니다.";
+		}else {
+			msg="회원정보 삭제중 오류가 발생하였습니다.";	
+		}
+		mv.addObject("msg",msg);
+		mv.setViewName("myPage_member/mypage_modifyResult");
 		return mv;
 	}
 }

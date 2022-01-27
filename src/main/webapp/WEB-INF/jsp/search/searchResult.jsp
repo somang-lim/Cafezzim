@@ -23,9 +23,6 @@
 
 
 <body>
-<%
-String date = request.getParameter("date");
-%>
 
 	<!-- ===============================================-->
 	<!--    Main Content-->
@@ -52,7 +49,7 @@ String date = request.getParameter("date");
 								<!-- 카페 예약 날짜 검색 -->
 								<div class="cafe-search-date">
 									<label>예약 날짜</label>
-									<input type="text" name="date" id="datePicker" value="<%=date %>" placeholder="날짜를 알려주세요">
+									<input type="text" name="date" id="datePicker" value="${date}" placeholder="날짜를 알려주세요">
 								</div>
 								<div class="cafe-search-btn text-center">
 									<button type="submit" class="btn btn-lg btn-primary rounded-pill hover-top"><i class="fas fa-search"></i> 검색</button>
@@ -87,7 +84,7 @@ String date = request.getParameter("date");
 					
 					<div class="col-6 col-md-3">
 						<div class="text-right">
-							<a href="map?findStr=${find }&date=<%=date %>" class="btn btn-lg btn-light rounded-pill">
+							<a href="map?findStr=${find }&date=${date}" class="btn btn-lg btn-light rounded-pill">
 								<i class="fas fa-map-marker-alt"></i>
 		          	<span class="fz-13">지도에서 보기</span>
 		          </a>
@@ -99,23 +96,50 @@ String date = request.getParameter("date");
 				
 				<div class="srchResults row">
 					<c:forEach var="vo" items="${list}">
-					<div class="srchResult-item col-xl-6" data-lat="${vo.lat }" data-lng="${vo.lng }">
-						<a href="view?id=${vo.cid}" class="search-item card shadow-lg mb-4 border-0">
-								<div class="d-flex">
-									<div class="search-item-img">
-										<div class="img-wrap">
-											<img src="../img/gallery/${vo.thumb }" class="img-fluid" alt="서울,경기">
+						<c:choose>
+							<c:when test="${vo.cond ne '휴무' }">
+							<div class="srchResult-item col-xl-6" data-lat="${vo.lat }" data-lng="${vo.lng }">
+								<a href="view?id=${vo.cid}&date=${date}" class="search-item card shadow-lg mb-4 border-0">
+										<div class="d-flex">
+											<div class="search-item-img">
+												<div class="img-wrap">
+													<img src="../img/gallery/${vo.thumb }" class="img-fluid" alt="서울,경기">
+												</div>
+											</div>
+											<div class="search-item-desc py-3 px-3">
+												<p class="fw-medium fz-14">${vo.name}</p>
+												<p class="fz-13">${vo.address } <br/> ${vo.distance * 1000}m</p>
+												<p class="fz-12"><i class="fas fa-star"></i> ${vo.rating } (${vo.rcnt})</p>
+											</div>
+										</div>
+										
+									</a>
+							</div>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+					<c:forEach var="vo2" items="${list}">
+						<c:choose>
+							<c:when test="${vo2.cond eq '휴무' }">
+							<div class="srchResult-item col-xl-6" data-lat="${vo2.lat }" data-lng="${vo2.lng }">
+								<div class="search-item card shadow-lg mb-4 border-0">
+									<div class="d-flex">
+										<div class="search-item-img">
+											<div class="img-wrap">
+												<img src="../img/gallery/${vo2.thumb }" class="img-fluid" alt="서울,경기">
+											</div>
+										</div>
+										<div class="search-item-desc py-3 px-3">
+											<p class="fw-medium fz-14">${vo2.name}</p>
+											<p class="fz-13">${vo2.address } <br/> ${vo2.distance * 1000}m</p>
+											<p class="fz-12"><i class="fas fa-star"></i> ${vo2.rating } (${vo2.rcnt})</p>
 										</div>
 									</div>
-									<div class="search-item-desc py-3 px-3">
-										<p class="fw-medium fz-14">${vo.name}</p>
-										<p class="fz-13">${vo.address } <br/> ${vo.distance * 1000}m</p>
-										<p class="fz-12"><i class="fas fa-star"></i> ${vo.rating } (${vo.rcnt})</p>
-									</div>
+										
 								</div>
-								
-							</a>
-					</div>
+							</div>
+							</c:when>
+						</c:choose>
 					</c:forEach>
 				</div>
 				

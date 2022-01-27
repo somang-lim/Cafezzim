@@ -76,13 +76,13 @@
 
 				<div class="d-flex">
 					<div class="col-5">
-						<a href="order?id=${vo.cid}" class="btn btn-lg btn-light w-100 mx-0 mb-2">자리 찜하기</a>
+						<a href="order?id=${vo.cid}&date=${date}" class="btn btn-lg btn-light w-100 mx-0 mb-2">자리 찜하기</a>
 						
 						<!-- <button type="button"
 							class="btn btn-lg btn-primary w-100 mx-0 mb-2">예약하기</button> -->
 					</div>
 					<div class="col-5">
-						<a href="order?id=${vo.cid}&pay=1" class="btn btn-lg btn-primary w-100 mx-0 mb-2">결제하기</a>
+						<a href="order?id=${vo.cid}&date=${date }&pay=1" class="btn btn-lg btn-primary w-100 mx-0 mb-2">결제하기</a>
 					</div>
 					<div class="col-2">
 						<input type="hidden" id="mid" value="${sessionScope.member_id }">
@@ -92,8 +92,6 @@
 						</button>
 					</div>
 				</div>
-
-
 
 			</div>
 		</section>

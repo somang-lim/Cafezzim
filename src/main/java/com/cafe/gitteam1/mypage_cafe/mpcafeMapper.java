@@ -19,6 +19,11 @@ public interface mpcafeMapper {
 	public List<mpcafe_listVo> cafesearch(String cafe_id);
 	public List<mpcafe_listVo> menu(String cafe_id);
 	public int insertOff(dayoffVo vo);
+	public int insertMenu(mpcafe_listVo lvo);
 	public int deleteOff(String cafe_id);
+	public int deleteMenu(String menu_id);
+	public int attInsert(mpcafe_listVo lvo);
+	public int deleteOtherphoto(String file_path);
+	public int modifyTitle(mpcafeVo vo);
 
 }

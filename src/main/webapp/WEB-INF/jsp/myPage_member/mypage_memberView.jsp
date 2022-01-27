@@ -40,10 +40,20 @@ String nowDate = simpleDateFormat.format(tempNowDate);
 
 		<!---------------------- 마이페이지 메뉴바 ------------------------------------------>
 		<div class="d-flex justify-content-between mb-1 border-0 text-center">
-			<a href="mypage_member" class="form-control btn-primary">회원 정보 관리</a>
+			<c:if test="${sessionScope.grade eq 'master' }">
+				<a href="mypage_admin" class="form-control btn-primary">회원 정보 관리</a>
+			</c:if>
+			<c:if test="${sessionScope.grade eq 'cafehost' || sessionScope.grade eq 'customer'}">
+				<a href="mypage_member" class="form-control btn-primary">회원 정보 관리</a>
+			</c:if>
 			<a href="/mypageBookingList?nowDate=<%=nowDate %>&id=${sessionScope.member_id}" 
 			class="form-control text-center bgBrownLighten1">예약 관리</a>
-			<a href="cafemanage" class="form-control">카페 관리</a>
+			<c:if test="${sessionScope.grade eq 'master'}">
+				<a href="cafemanage" class="form-control">카페 관리</a>
+			</c:if>
+			<c:if test="${sessionScope.grade eq 'cafehost'}">
+				<a href="${path }/cafeupdate?cafe_id=${sessionScope.cafe_id }" class="form-control">카페 관리</a>
+			</c:if>
 		</div>
 	</div>
 </section>
@@ -119,7 +129,7 @@ String nowDate = simpleDateFormat.format(tempNowDate);
 								<input type="button" class="btn btn-primary col-6" 
 								value="회원 정보 수정" name="btnMasterModify" id="btnMasterModify" />
 								<input type="button" class="btn btn-danger col-6" 
-								value="회원 탈퇴" name="btnMemberDelete" id="btnMemberDelete" />
+								value="회원 탈퇴" name="btnMasterDelete" id="btnMasterDelete" />
 							</div>
 						</form>
 					</div>

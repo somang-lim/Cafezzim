@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="viewMember" parameterType="com.cafe.gitteam1.member.MemberVo" resultType="com.cafe.gitteam1.member.MemberVo">
-		SELECT member_id, member_name, member_email, member_grade, member_phone
+		SELECT cafe_id, member_id, member_name, member_email, member_grade, member_phone
 		  FROM member
 		 WHERE member_id = #{member_id}
 		   AND password = #{password}

@@ -25,6 +25,8 @@ public class MemberVo {
 	
 	private Date limit_date;
 	
+	private String cafe_id;
+	
 
 	public String getMember_id() {
 		return member_id;
@@ -99,6 +101,12 @@ public class MemberVo {
 				+ ", member_phone=" + member_phone + ", member_email=" + member_email + ", member_grade=" + member_grade
 				+ ", join_date=" + join_date + ", isSocial=" + isSocial + ", autoLogin=" + autoLogin + ", session_id="
 				+ session_id + ", limit_date=" + limit_date + "]";
+	}
+	public String getCafe_id() {
+		return cafe_id;
+	}
+	public void setCafe_id(String cafe_id) {
+		this.cafe_id = cafe_id;
 	}
 	
 }

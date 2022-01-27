@@ -38,7 +38,12 @@ String nowDate = simpleDateFormat.format(tempNowDate);
 			<div class="d-flex justify-content-between mb-1 border-0 text-center">
 			<a href="mypage_member" class="form-control bgBrownLighten1 mb-5">회원 정보 관리</a>
 			<a href="/mypageBookingList?nowDate=<%=nowDate %>&id=${sessionScope.member_id}" class="form-control text-center bgBrownLighten1 mb-5" class="form-control">예약 관리</a>
-			<a href="cafemanage" class="form-control btn-primary bgBrownLighten1 mb-5">카페 관리</a>
+			<c:if test="${sessionScope.grade eq 'master'}">
+				<a href="cafemanage" class="form-control btn-primary bgBrownLighten1 mb-5">카페 관리</a>
+			</c:if>
+			<c:if test="${sessionScope.grade eq 'cafehost'}">
+				<a href="${path }/cafeupdate?cafe_id=${sessionScope.cafe_id }" class="form-control btn-primary bgBrownLighten1 mb-5">카페 관리</a>
+			</c:if>
 		</div>
 		</div>
 	</section>
@@ -126,7 +131,7 @@ String nowDate = simpleDateFormat.format(tempNowDate);
 							시작시간
 								<select name="start_time" id="select-start"
 									class="form-select select-start w-75" placeholder="시작 시간을 선택하세요.">
-									<option selected></option>
+									<option selected value=""></option>
 									<option value="10:00">10:00</option>
 									<option value="11:00">11:00</option>
 							 		<option value="12:00">12:00</option>
@@ -182,7 +187,6 @@ String nowDate = simpleDateFormat.format(tempNowDate);
 					</div>
 					
  -->				
-	
 					<button type="button" class="btn btn-primary btn-lg w-25"
 						id="dayOff-apply">적용</button>
 				</form>

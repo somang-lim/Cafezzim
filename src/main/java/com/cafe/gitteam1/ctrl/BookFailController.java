@@ -9,7 +9,11 @@ public class BookFailController {
 	@RequestMapping("bookfail")
 	public ModelAndView booksuccess() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("book/bookFail");
+		try {
+			mv.setViewName("book/bookFail");
+		}catch(Exception e) {
+			mv.setViewName("member/signIn");
+		}
 		return mv;
 	}
 }

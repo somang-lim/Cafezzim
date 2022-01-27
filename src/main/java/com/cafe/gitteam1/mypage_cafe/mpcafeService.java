@@ -19,6 +19,8 @@ import com.cafe.gitteam1.mypage_cafe.mpcafe_listVo;
 @Service
 @Transactional
 public class mpcafeService {
+	public static String uploadPath="/Users/minji/Desktop/저장/Cafezzim-master/src/main/resources/static/img/gallery";
+	
 	@Autowired
 	mpcafeMapper mapper;
 	
@@ -27,7 +29,7 @@ public class mpcafeService {
 	TransactionStatus status;
 	String findStr;
 	String cafe_id;
-	mpcafeVo vo;
+	mpcafeVo vo;	
 	
 	public List<mpcafeVo> search(String findStr){
 		List<mpcafeVo> list = null;
@@ -109,11 +111,51 @@ public class mpcafeService {
 	return b;
 	}
 	
+	public boolean scnmodify(mpcafeVo vo) {
+		boolean b = false;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		
+		int c = 0;
+		try {
+			for(mpcafe_listVo lvo: vo.getCafesearch()) {
+				c += mapper.scnmodify(lvo);
+			}
+			if(c == vo.getCafesearch().size()) {
+				manager.commit(status);
+				b = true;
+			}else {
+				manager.rollback(status);
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return b;	
+		
+	}
+	
+	
+	
 	public boolean insertOff(dayoffVo dvo) {
 		boolean b = false;
 		status = manager.getTransaction(new DefaultTransactionDefinition());
 		
 			int c = mapper.insertOff(dvo);
+			if(c>0) {
+				manager.commit(status);
+				b = true;
+			}else {
+				manager.rollback(status);
+			}
+
+		return b;
+		
+	}
+	
+	public boolean insertMenu(mpcafe_listVo lvo) {
+		boolean b = false;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		
+			int c = mapper.insertMenu(lvo);
 			if(c>0) {
 				manager.commit(status);
 				b = true;
@@ -140,6 +182,111 @@ public class mpcafeService {
 		return b;
 		
 	}
+	
+	public boolean deleteMenu(String menu_id) {
+		boolean b = false;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		
+		int c = mapper.deleteMenu(menu_id);
+		if(c>0) {
+			manager.commit(status);
+			b = true;
+		}else {
+			manager.rollback(status);
+		
+		}
+		return b;
+		
+	}
+	
+	public boolean insertAtt(mpcafeVo vo) {
+		boolean b = false;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		
+		int c = 0;
+		try {
+			for(mpcafe_listVo lvo: vo.getOtherphotos()) {
+				c += mapper.attInsert(lvo);
+			}
+			if(c == vo.getOtherphotos().size()) {
+				manager.commit(status);
+				b = true;
+			}else {
+				manager.rollback(status);
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return b;	
+		
+	}
 
+	public boolean deleteOtherphoto(String file_path) {
+		boolean b = false;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		
+		int c = mapper.deleteOtherphoto(file_path);
+		if(c>0) {
+			manager.commit(status);
+			b = true;
+			File delFile = new File("/Users/minji/Desktop/저장/Cafezzim-master/src/main/resources/static/" + file_path); 
+			if(delFile.exists()) delFile.delete();
+		}else {
+			manager.rollback(status);
+		
+		}
+		return b;
+		
+	}
+	//타이틀사진삭제
+	public boolean deleteTitle(String pre_title) {
+		boolean b = false;
+			File delFile = new File(uploadPath + pre_title); 
+			if(delFile.exists()) delFile.delete();
+			b=true;
+		return b;		
+	}
+	
+	//타이틀사진 추가
+	public boolean modifyTitle(mpcafeVo vo) {
+		boolean b = false;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		
+		int c = mapper.modifyTitle(vo);
+		if(c>0) {
+			manager.commit(status);
+			b = true;
+		}else {
+			manager.rollback(status);
+		}
+		return b;	
+		
+	}
+
+	
+	/*
+	public boolean titleModify(mpcafeVo vo) {
+	
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		boolean b = false;
+		Object savePoint = null;
+		
+	try {
+		savePoint = status.createSavepoint();
+		int c = mapper.titleModify(vo); //기본카페정보만 수정
+		
+		if(c>0) {//DB가 업데이트되면 커밋									
+			manager.commit(status);
+			b=true;
+			
+			}else {
+				status.rollbackToSavepoint(savePoint);
+			}
+	}catch(Exception ex) {
+		ex.printStackTrace();
+	}
+	return b;
+	}
+	*/
 
 }

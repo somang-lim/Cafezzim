@@ -10,6 +10,8 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.cafe.gitteam1.reserve.ReserveVo;
+
 @Service
 @Transactional
 public class SearchService {
@@ -26,11 +28,25 @@ public class SearchService {
 	
 	public List<CafeInfoVo> cafeSearch(SearchVo search) {
 		List<CafeInfoVo> list = null;
-		
+		ReserveVo rv = new ReserveVo();
+				
 		list = mapper.cafeSearch(search);
+		for(CafeInfoVo vo : list) {
+			String chk = "";
+			int c = Integer.parseInt(vo.getCid());
+			String dt = search.getDate();
+			
+			rv.setCafe_id(c);
+			rv.setReserve_date(dt);
+			
+			chk = mapper.chkWork(rv);
+			vo.setCond(chk);
+
+		}
 		
 		return list;
 	}
+	
 	
 	public List<String> cafeFindName(String findStr){
 		List<String> list = mapper.cafeFindName(findStr);

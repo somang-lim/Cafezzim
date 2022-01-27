@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -21,7 +23,13 @@
 
 
 <body>
+<%//오늘 날짜 구하기 
+Date tempNowDate = new Date(); 
 
+//원하는 데이터 포맷 지정 
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+String nowDate = simpleDateFormat.format(tempNowDate); 
+%>
 	<!-- ===============================================-->
 	<!--    Main Content-->
 	<!-- ===============================================-->
@@ -34,10 +42,19 @@
 
 		<!---------------------- 마이페이지 메뉴바 ------------------------------------------>
 		<div class="d-flex justify-content-between mb-1 border-0 text-center">
-			<a href="mypage_member" class="form-control btn-primary">회원 정보 관리</a>
-			<a href="mypageBookingList" class="form-control">예약 관리</a>
-			<c:if test="${sessionScope.grade eq 'cafehost' or sessionScope.grade eq 'master'}">
+			<c:if test="${sessionScope.grade eq 'master' }">
+				<a href="mypage_admin" class="form-control btn-primary">회원 정보 관리</a>
+			</c:if>
+			<c:if test="${sessionScope.grade eq 'cafehost' || sessionScope.grade eq 'customer'}">
+				<a href="mypage_member" class="form-control btn-primary">회원 정보 관리</a>
+			</c:if>
+			<a href="/mypageBookingList?nowDate=<%=nowDate %>&id=${sessionScope.member_id}" 
+			class="form-control text-center bgBrownLighten1">예약 관리</a>
+			<c:if test="${sessionScope.grade eq 'master'}">
 				<a href="cafemanage" class="form-control">카페 관리</a>
+			</c:if>
+			<c:if test="${sessionScope.grade eq 'cafehost'}">
+				<a href="${path }/cafeupdate?cafe_id=${sessionScope.cafe_id }" class="form-control">카페 관리</a>
 			</c:if>
 		</div>
 	</div>

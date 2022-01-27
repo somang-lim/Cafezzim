@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.gitteam1.board.BoardMapper">
+	<select id="totSize" parameterType="String" resultType="Integer">
+		SELECT count(notice_serial) totSize
+		  FROM notice
+		 WHERE subject     like '%${_parameter}%'
+		    OR content     like '%${_parameter}%'
+		  	OR member_name like '%${_parameter}%'
+		    OR member_id   like '%${_parameter}%'
+	</select>
+	
+	<select id="notice_search" parameterType="com.cafe.gitteam1.board.Page" resultType="com.cafe.gitteam1.board.NoticeVo">
+		SELECT notice_serial, member_name, subject, content
+		  FROM notice
+		  <if test="notice_sort != null">
+			 WHERE
+			 <choose>
+					<when test="notice_sort eq 'subject'">subject like '%${notice_search}%'</when>
+			    <when test="notice_sort eq 'content'">content like '%${notice_search}%'</when>
+			 </choose> 
+		  </if>
+		 ORDER BY notice_serial DESC
+		 LIMIT ${startNo-1}, ${listSize}
+	</select>
+	
+	<select id="notice_view" parameterType="String" resultType="com.cafe.gitteam1.board.NoticeVo">
+		SELECT notice_serial, member_name, subject, content
+		  FROM notice
+		 WHERE notice_serial = #{_parameter}
+	</select>
+	
+	<select id="notice_show_file" parameterType="String" resultType="com.cafe.gitteam1.board.NoticePhotoVo">
+		SELECT notice_file
+		  FROM notice_photo
+		 WHERE notice_serial = #{_parameter}
+	</select>
+	
+	<insert id="notice_insert" parameterType="com.cafe.gitteam1.board.NoticeVo">
+		INSERT INTO notice(member_id, member_name, subject, content)
+		VALUES (#{member_id}, #{member_name}, #{subject}, #{content})
+	</insert>
+	
+	<select id="last_insert_id" resultType="Integer">
+		SELECT last_insert_id();
+	</select>
+	
+	<insert id="notice_insert_photo" parameterType="com.cafe.gitteam1.board.NoticePhotoVo">
+		INSERT INTO notice_photo(notice_file, notice_serial)
+		VALUES (#{notice_file}, #{notice_serial})
+	</insert>
+
+	<delete id="notice_delete_photo" parameterType="com.cafe.gitteam1.board.NoticePhotoVo">
+		DELETE FROM notice_photo
+		 WHERE notice_file = #{notice_file}
+	</delete>
+
+	<update id="notice_modify" parameterType="com.cafe.gitteam1.board.NoticeVo">
+		UPDATE notice
+		   SET subject = #{subject}, content = #{content}
+		 WHERE notice_serial = #{notice_serial}
+	</update>
+	
+	<delete id="notice_delete" parameterType="String">
+		DELETE FROM notice
+		 WHERE notice_serial = #{_parameter}
+	</delete>
+	
+	<delete id="notice_delete_file" parameterType="String">
+		DELETE FROM notice_photo
+		 WHERE notice_serial = #{_parameter}
+	</delete>
+</mapper>

@@ -16,6 +16,34 @@ String request;
 int payment_price;
 String payment_method;
 String payment_date;
+String uuid;
+int cuponSN;//사용 쿠폰SN
+
+// 발급할 쿠폰 수 
+int orderCnt;
+
+//2022-01-23추가
+String cafe_name;
+int sales;
+String pdate;
+public String getCafe_name() {
+	return cafe_name;
+}
+public void setCafe_name(String cafe_name) {
+	this.cafe_name = cafe_name;
+}
+public int getSales() {
+	return sales;
+}
+public void setSales(int sales) {
+	this.sales = sales;
+}
+public String getPdate() {
+	return pdate;
+}
+public void setPdate(String pdate) {
+	this.pdate = pdate;
+}
 
 // 게터 세터 
 public int getReseve_id() {
@@ -101,6 +129,70 @@ public String getPayment_date() {
 }
 public void setPayment_date(String payment_date) {
 	this.payment_date = payment_date;
+}
+public String getUuid() {
+	return uuid;
+}
+public void setUuid(String uuid) {
+	this.uuid = uuid;
+}
+public int getCuponSN() {
+	return cuponSN;
+}
+public void setCuponSN(int cuponSN) {
+	this.cuponSN = cuponSN;
+}
+public int getOrderCnt() {
+	return orderCnt;
+}
+public void setOrderCnt(int orderCnt) {
+	this.orderCnt = orderCnt;
+}
+@Override
+public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("ReserveVo [reseve_id=");
+	builder.append(reseve_id);
+	builder.append(", cafe_id=");
+	builder.append(cafe_id);
+	builder.append(", member_id=");
+	builder.append(member_id);
+	builder.append(", isCancelled=");
+	builder.append(isCancelled);
+	builder.append(", reserve_date=");
+	builder.append(reserve_date);
+	builder.append(", reserve_time=");
+	builder.append(reserve_time);
+	builder.append(", reserve_name=");
+	builder.append(reserve_name);
+	builder.append(", reserve_phone=");
+	builder.append(reserve_phone);
+	builder.append(", reserve_4seats=");
+	builder.append(reserve_4seats);
+	builder.append(", reserve_2seats=");
+	builder.append(reserve_2seats);
+	builder.append(", request=");
+	builder.append(request);
+	builder.append(", payment_price=");
+	builder.append(payment_price);
+	builder.append(", payment_method=");
+	builder.append(payment_method);
+	builder.append(", payment_date=");
+	builder.append(payment_date);
+	builder.append(", uuid=");
+	builder.append(uuid);
+	builder.append(", cuponSN=");
+	builder.append(cuponSN);
+	builder.append(", orderCnt=");
+	builder.append(orderCnt);
+	builder.append(", cafe_name=");
+	builder.append(cafe_name);
+	builder.append(", sales=");
+	builder.append(sales);
+	builder.append(", pdate=");
+	builder.append(pdate);
+	builder.append("]");
+	return builder.toString();
 }
 
 

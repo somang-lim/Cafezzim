@@ -29,6 +29,11 @@
   </if>
 	limit ${startNo},${listSize}
 	</select>
+	
+	<select id="chkWork" parameterType="com.cafe.gitteam1.reserve.ReserveVo" resultType="String">
+	select off_type as offtype from dayoff where cafe_id=#{cafe_id} and off_date=#{reserve_date}
+	
+	</select>
 
 	<select id="cafeFindName" resultType="String">
 	SELECT cafe_name FROM cafe_info WHERE cafe_name like "%${_parameter}%"

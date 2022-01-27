@@ -41,7 +41,7 @@ function getSearchList(){
 			if(areaArr.length){
 				areaArr.forEach((el)=>{
 					str += '<div class="srchResult-item col-xl-6" data-lat="'+el.lat+'" data-lng="'+el.lng+'">'
-					     + 	'<a href="view?id='+el.cid+'" class="search-item card shadow-lg mb-4 border-0">'
+					     + 	'<a href="view?id='+el.cid+'&date'+ $("#datePicker").val() + '" class="search-item card shadow-lg mb-4 border-0">'
                + 		'<div class="d-flex">'
                + 			'<div class="search-item-img">'
                + 				'<div class="img-wrap">'

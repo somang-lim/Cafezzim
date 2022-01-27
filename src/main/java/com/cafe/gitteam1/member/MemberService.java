@@ -49,6 +49,7 @@ public class MemberService {
 					session.setAttribute("name", vo2.getMember_name());
 					session.setAttribute("grade", vo2.getMember_grade());
 					session.setAttribute("phone", vo2.getMember_phone());
+					session.setAttribute("cafe_id", vo2.getCafe_id());
 					
 					isSignIn = true;
 				}

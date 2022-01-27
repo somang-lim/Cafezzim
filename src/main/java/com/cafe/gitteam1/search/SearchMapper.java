@@ -6,10 +6,13 @@ import java.util.Set;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.cafe.gitteam1.reserve.ReserveVo;
+
 @Mapper
 @Repository
 public interface SearchMapper {
 	public List<CafeInfoVo> cafeSearch(SearchVo search);
+	public String chkWork(ReserveVo vo);
 	public List<String> cafeFindName(String findStr);
 	public Set<String> cafeFindLocation(String findStr);
 	public CafeInfoVo viewCafe(String cid);

@@ -38,8 +38,8 @@ String nowDate = simpleDateFormat.format(tempNowDate);
 		<h3 class="mypage-title mb-4">My page</h3>
 
 		<!---------------------- 마이페이지 메뉴바 ------------------------------------------>
-		<div class="d-flex justify-content-between mb-1 border-0 text-center">
-			<a href="mypage_member" class="form-control bgBrownLighten1 mb-5">회원 정보 관리</a>
+		<div class="d-flex justify-content-between mb-1 border-0 text-center">			
+			<a href="mypage_admin" class="form-control bgBrownLighten1 mb-5">회원 정보 관리</a>	
 			<a href="/mypageBookingList?nowDate=<%=nowDate %>&id=${sessionScope.member_id}" class="form-control text-center bgBrownLighten1 mb-5" class="form-control">예약 관리</a>
 			<a href="cafemanage" class="form-control btn-primary bgBrownLighten1 mb-5">카페 관리</a>
 		</div>
@@ -47,7 +47,7 @@ String nowDate = simpleDateFormat.format(tempNowDate);
 </section>
 							
 	<!-- 예약리스트 -->
-	<section id="shadowbox" class="pt-4 pb-1 ml-5">
+	<section id="shadowbox" class="pt-1 pb-1 ml-5">
 		<div class="container">	
 			
 				<!----------------------- 검색창 ------------------------------------------>

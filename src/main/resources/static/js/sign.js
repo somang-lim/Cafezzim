@@ -4,8 +4,8 @@
 
 $(function(){
 	$("#btnSignIn").click(function(){
-		var member_id = $("#member_id").val();
-		var password = $("#password").val();
+		let member_id = $("#member_id").val();
+		let password = $("#password").val();
 
 		if(!member_id){
 			return;
@@ -24,8 +24,8 @@ $(function(){
 	});
 	
 	$("#btnSearchId").click(function(){
-		var member_name = $("#member_name").val();
-		var member_phone = $("#member_phone").val();
+		let member_name = $("#member_name").val();
+		let member_phone = $("#member_phone").val();
 		
 		if(!member_name){
 			alert("이름을 입력해주세요.");
@@ -57,9 +57,9 @@ $(function(){
 	});
 
 	$("#btnSearchPw").click(function(){
-		var member_id = $("#member_id").val();
-		var member_name = $("#member_name").val();
-		var member_email = $("#member_email").val();
+		let member_id = $("#member_id").val();
+		let member_name = $("#member_name").val();
+		let member_email = $("#member_email").val();
 
 		if(!member_id){
 			return;
@@ -69,7 +69,7 @@ $(function(){
 			return;
 		}
 
-		var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		let regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		if(member_email.match(regEmail) == null){
 			alert("올바른 이메일 형식이 아닙니다.");
 			return;

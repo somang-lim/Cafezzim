@@ -44,17 +44,32 @@ nowDate = simpleDateFormat.format(tempNowDate);
 					<div class="location-img my-4">
 						<img src="../img/gallery/${param.photo }" class="img-fluid col-lg-8 col-12 w-100" alt="서울,경기">
 					</div>
-					<div class="location-desc pt-1 px-4">
+					<div class="pt-1 px-4">
 						<h4>${param.cafe_address }</h4>
 						<span class="text-muted">${param.cafe_name }</span>
 						<br/>
 						<small>예약일자 ${param.reserve_date }</small>
+						<br/>
+						<br/>
+						<c:choose>
+							<c:when test="${cupon>0 }">
+								<h6 class="mt-4">축하합니다!!</h6>
+								<h6 class="mt-4">${sessionScope.name } 님께 ${cupon} 개의 쿠폰이 지급되었습니다!</h6>
+								<br/>
+								<h6 class="mt-4">남은 스탬프는 ${stamp} 개 입니다</h6>
+							</c:when>
+							<c:otherwise>
+							<h6 class="mt-4">${sessionScope.name }님께 ${giveStamp }개의 스탬프가 지급되었습니다. </h6>
+							<h6 class="mt-4">현재 스탬프는 ${stamp} 개 입니다</h6>
+							</c:otherwise>
+												
+						</c:choose>
 					</div>
 			<!-- 	</a> -->
 		</div>
 		<div class="d-flex text-center">
 			<div class="col-6"><a href="/" class="form-control">다른예약하기</a></div>
-			<div class="col-6"><a href="mypageBookingList?nowDate=<%=nowDate %>&id=${sessionScope.member_id}" class="form-control btn-primary">예약내용 확인하기</a></div>
+			<div class="col-6"><a href="mypageBookingList?nowDate=<%=nowDate %>" class="form-control btn-primary">예약내용 확인하기</a></div>
 		</div>
 	</div>
 </section>

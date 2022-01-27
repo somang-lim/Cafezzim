@@ -14,6 +14,8 @@ public class CafeInfoVo {
 	private int rcnt;
 	private float rating;
 	private List<ReviewVo> review;
+	private String cond;
+	private String offdate;
 	
 	
 	public String getCid() {
@@ -85,10 +87,49 @@ public class CafeInfoVo {
 	public void setReview(List<ReviewVo> review) {
 		this.review = review;
 	}
+	public String getCond() {
+		return cond;
+	}
+	public void setCond(String cond) {
+		this.cond = cond;
+	}
+	public String getOffdate() {
+		return offdate;
+	}
+	public void setOffdate(String offdate) {
+		this.offdate = offdate;
+	}
 	@Override
 	public String toString() {
-		return "CafeInfoVo [cid=" + cid + ", name=" + name + ", address=" + address + ", detail=" + detail + ", thumb="
-				+ thumb + ", lat=" + lat + ", lng=" + lng + ", rating=" + rating + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("CafeInfoVo [cid=");
+		builder.append(cid);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", address=");
+		builder.append(address);
+		builder.append(", detail=");
+		builder.append(detail);
+		builder.append(", thumb=");
+		builder.append(thumb);
+		builder.append(", lat=");
+		builder.append(lat);
+		builder.append(", lng=");
+		builder.append(lng);
+		builder.append(", distance=");
+		builder.append(distance);
+		builder.append(", rcnt=");
+		builder.append(rcnt);
+		builder.append(", rating=");
+		builder.append(rating);
+		builder.append(", review=");
+		builder.append(review);
+		builder.append(", cond=");
+		builder.append(cond);
+		builder.append(", offdate=");
+		builder.append(offdate);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 }

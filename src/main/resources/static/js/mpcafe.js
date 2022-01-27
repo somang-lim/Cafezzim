@@ -63,4 +63,31 @@ $(function() {
 		alert("요청하신 휴무일 및 일시정지가 적용되었습니다.");	
 	})
 
+	$('#btnDrink').click(function(){
+		$frm = $('#frm_addDrink')[0];
+		$frm.action = "menuSave"
+		$frm.submit();
+	})
+	
+	$('#btnFood').click(function(){
+		$frm = $('#frm_addFood')[0];
+		$frm.action = "menuSave"
+		$frm.submit();
+	})
+	
+	$('#btnOtherphoto').click(function() {
+		$frm = $('#frm_upload')[0];
+		$frm.enctype = "multipart/form-data";
+		$frm.action = "fileSave";
+		$frm.submit();		
+	})
+	
+	$('#btnTitlephoto').click(function() {
+		$frm = $('#frm_titleupload')[0];
+		$frm.enctype = "multipart/form-data";
+		$frm.action = "titlemodify";
+		$frm.submit();	
+	})
+	
+
 })

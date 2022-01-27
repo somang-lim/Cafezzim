@@ -26,6 +26,7 @@
 					class="nav-link fw-medium" href="#location">지역별 검색</a></li>
 				<li class="nav-item" data-anchor="data-anchor"><a
 					class="nav-link fw-medium" href="#faq">FAQ</a></li>
+					<li class="nav-item"><a class="nav-link fw-medium" href="notice">Notice</a></li>
 				<c:if test="${empty sessionScope.member_id}">
 					<li class="nav-item"><a class="nav-link fw-medium" href="signIn">로그인</a></li>
 					<li class="nav-item"><a class="nav-link fw-medium" href="signUp">회원가입</a></li>
@@ -46,7 +47,6 @@
 		          <ul class="dropdown-menu text-small mr-5" aria-labelledby="dropdownUser2">
 		          	<li><p class="dropdown-header">${sessionScope.name}님 반갑습니다.</p></li>
 		            <li><a class="dropdown-item" href="mypage_member">마이페이지</a></li>
-		            <li><a class="dropdown-item" href="mypageBookingList?id=${sessionScope.member_id}">예약확인</a></li>
 		            <li><hr class="dropdown-divider"></li>
 		            <li><a class="dropdown-item" href="signOut">로그아웃</a></li>
 		          </ul>
@@ -55,9 +55,7 @@
  	          <c:if test="${sessionScope.grade eq 'cafehost'}">
 		          <ul class="dropdown-menu text-small mr-5" aria-labelledby="dropdownUser2">
 			          <li><p class="dropdown-header">${sessionScope.name}님 반갑습니다.</p></li>
-		            <li><a class="dropdown-item" href="mypage_member">마이페이지</a></li>
-		            <li><a class="dropdown-item" href="mypageBookingList?id=${sessionScope.member_id}">예약확인</a></li>
- 		            <li><a class="dropdown-item" href="cafemanage">카페정보</a></li>
+		            <li><a class="dropdown-item" href="mypageBookingList?id=${sessionScope.member_id}">마이페이지</a></li>
 		            <li><hr class="dropdown-divider"></li>
 		            <li><a class="dropdown-item" href="signOut">로그아웃</a></li>
 		          </ul>
@@ -66,13 +64,12 @@
  	          <c:if test="${sessionScope.grade eq 'master'}">
 		          <ul class="dropdown-menu text-small mr-5" aria-labelledby="dropdownUser2">
 		          	<li><p class="dropdown-header">${sessionScope.name}님 반갑습니다.</p></li>
-		            <li><a class="dropdown-item" href="cafemanage">관리페이지</a></li>
-		            <li><a class="dropdown-item" href="mypage_admin">회원관리</a></li>
+		            <li><a class="dropdown-item" href="mypage_admin">관리페이지</a></li>
+		            <li><a class="dropdown-item" href="salesStatus">매출현황</a></li>
 		            <li><hr class="dropdown-divider"></li>
 		            <li><a class="dropdown-item" href="signOut">로그아웃</a></li>
 		          </ul>
 	          </c:if>	          
-	          
 	        </div>
 	      </div>
 			</c:when>			

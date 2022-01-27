@@ -29,8 +29,20 @@
 </section>
 
 <div class="d-flex justify-content-between w-70 mb-1 mx-8 border-0 p-4">
+	
+
+
 	<a href="mypage_member"><input type="button" class="form-control btn-primary" value="마이페이지 홈으로"></a>
-	<a href="cafemanage"><input type="button" class="form-control" value="카페관리 페이지로"></a>
+	
+	
+	<c:if test="${sessionScope.grade eq 'master'}">
+		<a href="cafemanage"><input type="button" class="form-control" value="카페관리 페이지로"></a>
+	</c:if>
+	<c:if test="${sessionScope.grade eq 'cafehost'}">
+		<a href="${path }/cafeupdate?cafe_id=${sessionScope.cafe_id }"><input type="button" class="form-control" value="카페관리 페이지로"></a>
+	</c:if>
+	
+	
 </div>
 <%@include file="../footer.jsp" %>
 </body>

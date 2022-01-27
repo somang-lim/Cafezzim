@@ -30,45 +30,95 @@
 	<!-- ===============================================-->
 	<!--    헤더   -->
 	<%@include file="../header.jsp"%>
+	<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%//오늘 날짜 구하기 
+Date tempNowDate = new Date(); 
 
+//원하는 데이터 포맷 지정 
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+String nowDate = simpleDateFormat.format(tempNowDate); 
+%>
+
+
+<!-- 마이페이지 내 메뉴- -->
+<section class="pt-8 pb-4" id="kind">
+	<div class="container">
+		<h3 class="mypage-title mb-4">My page</h3>
+
+		<!---------------------- 마이페이지 메뉴바 ------------------------------------------>
+		<div class="d-flex justify-content-between mb-1 border-0 text-center">			
+			<c:if test="${sessionScope.grade eq 'master' }">
+				<a href="mypage_admin" class="form-control bgBrownLighten1 mb-5">회원 정보 관리</a>
+			</c:if>
+			<c:if test="${sessionScope.grade eq 'cafehost' }">
+				<a href="mypage_member" class="form-control bgBrownLighten1 mb-5">회원 정보 관리</a>
+			</c:if>
+			<a href="/mypageBookingList?nowDate=<%=nowDate %>&id=${sessionScope.member_id}" class="form-control text-center bgBrownLighten1 mb-5" class="form-control">예약 관리</a>
+			<c:if test="${sessionScope.grade eq 'master'}">
+				<a href="cafemanage" class="form-control btn-primary bgBrownLighten1 mb-5">카페 관리</a>
+			</c:if>
+			<c:if test="${sessionScope.grade eq 'cafehost'}">
+				<a href="${path }/cafeupdate?cafe_id=${sessionScope.cafe_id }" class="form-control btn-primary bgBrownLighten1 mb-5">카페 관리</a>
+			</c:if>
+		</div>
+	</div>
+</section>
+	
 	<!-------------------------------------------    사진관리 부분   -------------------------------------------->
-	<section class="pt-8 pb-1 ml-5">
+	<section class="pt-1 pb-1 ml-5">
 		<div class="container">
 			<h3>카페 사진 관리</h3>
-				<div class="row align-items-center">
-					<div class="col-md-6 col-lg-3">
-						<a href="" class="location-item card shadow-lg mb-4 border-0"
-							style="height: 200px">
-							<div class="location-img">
-								<img src="img/gallery/${vo.title_photo }" class="img-fluid"
-									alt="서울,경기">
-							</div>
-							<div class="location-desc pt-1 px-3" style="height: 50px">
-								<button type="button" class="btn btn-link">메인사진 수정</button>
-							</div>
-						</a>
+			
+			<!-- 메인(타이틀)사진 -->
+			
+			<div class="col-md-6 col-lg-6">
+				<div class="location-item card shadow-lg mb-4 border-0"
+					style="height: 250px">
+					<div class="location-img">
+						<img src="img/gallery/${vo.title_photo }" name="title_photo" class="img-fluid">
 					</div>
+				<form name='frm_titleupload' id='frm_titleupload' method='post' enctype='multipart/form-data'>			
+					<div class="location-desc pt-1 px-3" style="height: 100px">
+					<input type="file" name="title_photo" class="form-control">
+					<input type="hidden" name="cafe_id" value="${vo.cafe_id}">
+					<input type="hidden" name="pre_title" value="${vo.title_photo }">
+					<button type="button" id="btnTitlephoto" class="btn btn-link">메인사진 수정</button>	
+					</div>
+				</form>	
+				</div>
+			</div>		
+		
+			
+				<div class="row align-items-center">
+					<br/>
 					<c:if test="${not empty vo.otherphotos }">
 						<c:forEach var='photo' items='${vo.otherphotos }'>
 							<div class="col-md-6 col-lg-3">
-								<a href="" class="location-item card shadow-lg mb-4 border-0"
+								<div class="location-item card shadow-lg mb-4 border-0"
 									style="height: 200px">
 									<div class="location-img">
-										<img src="${photo.file_path }" class="img-fluid" alt="강릉">
+										<img src="${photo.file_path }" class="img-fluid">
 									</div>
 									<div class="location-desc pt-1 px-3" style="height: 50px">
+									<a href="${path }/deleteOtherphoto?file_path=${photo.file_path }&cafe_id=${vo.cafe_id}">	
 										<button type="button" class="btn btn-link">삭제</button>
+									</a>
 									</div>
-								</a>
+								</div>
 							</div>
 						</c:forEach>
 					</c:if>
 				</div>
-
+			<form name='frm_upload' id='frm_upload' method='post'>
 			<div class="imageadd">
-				<button type="button" class="btn btn-outline-primary btn-sm">카페사진
+       			<input type="file" name="photo_name" class="form-control" multiple='multiple'>
+				<input type="hidden" name="cafe_id" value="${vo.cafe_id}">
+				<br />
+				<button type="button" id="btnOtherphoto" class="btn btn-outline-primary btn-sm">카페사진
 					추가</button>
 			</div>
+			</form>
 			<br /> <br />
 
 		</div>
@@ -139,12 +189,12 @@
 				<input type="hidden" name="cafe_id" value='${vo.cafe_id }'>
 		</div>
 	</section>
-
+	</form>
+	
+		<!-----------------------------   카페검색키워드(cafe_searchname부분)   ------------------------------------------>
 	<section id="target" class="py-5">
 		<div class="container">
-
-			<!-----------------------------   카페검색키워드(cafe_searchname부분)   ------------------------------------------>
-			<h3>검색 키워드 관리</h3>
+				<h3>검색 키워드 관리</h3>
 				<div class="row">
 					<c:if test="${not empty vo.cafesearch }">
 						<c:forEach var='name' items='${vo.cafesearch }'>
@@ -155,14 +205,10 @@
 							</div>
 						</c:forEach>
 					</c:if>
-					<div class="col">
-						<input type="text" class="form-control" id="search_name"
-							name="search_name" placeholder="새 지역명 입력">
-					</div>
 				</div>
 			<br />
 
-			<!-----------------------------   카페메뉴(cafe_searchname부분)   ------------------------------------------>
+			<!-----------------------------   카페메뉴(menu부분)   ------------------------------------------>
 			<div id="menu" class="panel-item py-0">
 					<h3>음료 메뉴 수정</h3>
 					<c:if test="${not empty vo.menu}">
@@ -171,21 +217,30 @@
 								<div class="mb-3">
 									<input type="text" class="menuname" value="${menu.menu_name}">
 									<input type="text" class="menuprice" value="${menu.menu_price}">
+									<input type="hidden" name="menu_id" value="${menu.menu_id }">
+									<a href="${path }/deleteMenu?menu_id=${menu.menu_id }&cafe_id=${vo.cafe_id}">
 									<button type="button" class="btn btn-link">삭제</button>
+									</a>
 								</div>
 							</c:if>
 						</c:forEach>
 					</c:if>
 
+					<form id="frm_addDrink" name="frm_addDrink" method='post'> <!-- 메뉴insert위한 폼 -->
 					<div class="mb-3">
-						<input type="text" class="menuid2" placeholder="새 메뉴 입력">
-						<input type="text" class="menuid1" placeholder="가격 입력">
+						<input type="hidden" name="cafe_id" value="${vo.cafe_id}">
+						<input type="text" name="menu_name" class="menuid2" placeholder="새 메뉴 입력">
+						<input type="text" name="menu_price" class="menuid1" placeholder="가격 입력">
+						<input type="hidden" name="menu_type" value="2">
+						
 					</div>
 					<div class="menuadd">
-						<button type="button" class="btn btn-outline-primary btn-sm">음료메뉴
+						<button type="button" id="btnDrink" class="btn btn-outline-primary btn-sm">음료메뉴
 							추가</button>
 
 					</div>
+					</form>
+					
 					<br /> <br />
 
 
@@ -196,21 +251,26 @@
 								<div class="mb-3">
 									<input type="text" class="menuname" value="${menu.menu_name}">
 									<input type="text" class="menuprice" value="${menu.menu_price}">
+									<a href="${path }/deleteMenu?menu_id=${menu.menu_id }&cafe_id=${vo.cafe_id}">
 									<button type="button" class="btn btn-link">삭제</button>
+									</a>
 								</div>
 							</c:if>
 						</c:forEach>
 					</c:if>
-
+					
+					<form id="frm_addFood" name="frm_addFood" method='post'> <!-- 메뉴insert위한 폼 -->
 					<div class="mb-3">
-						<input type="text" class="menuid4" placeholder="새 메뉴입력"> <input
-							type="text" class="menuid1" placeholder="새 가격입력">
-						<button type="button" class="btn btn-link">삭제</button>
+						<input type="text" name="menu_name" class="menuid4" placeholder="새 메뉴입력"> 
+						<input type="text" name="menu_price" class="menuid1" placeholder="새 가격입력">
+						<input type="hidden" name="menu_type" value="1">
+						<input type="hidden" name="cafe_id" value="${vo.cafe_id}">
 					</div>
 					<div class="menuadd">
-						<button type="button" class="btn btn-outline-primary btn-sm">메인메뉴
+						<button type="button" id="btnFood" class="btn btn-outline-primary btn-sm">메인메뉴
 							추가</button>
 					</div>
+					</form>
 			</div>
 			<br />
 
@@ -224,7 +284,6 @@
 		<!-- //container -->
 
 	</section>
-	</form>
 
 
 	<%@include file="../footer.jsp"%>

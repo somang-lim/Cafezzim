@@ -43,6 +43,15 @@ $(function(){
 			alert("탈퇴가 정상적으로 처리되었습니다.");	
 		}
 	})
+	//관리자가 회원정보삭제
+	$("#btnMasterDelete").click(function(){
+		var chkConfirm = confirm("정말 탈퇴하시겠습니까?");
+		if(chkConfirm){
+			$frm.member_grade.value="leaver";
+			$frm.action = "masterDelete";
+			$frm.submit();
+		}
+	})
 	
 	//중복 아이디 체크
 	$("#btnIdCheck").click(function(){

@@ -45,6 +45,7 @@ public class SearchController {
 		
 		mv.addObject("list",list);
 		mv.addObject("find",search.getFindStr());
+		mv.addObject("date",search.getDate());
 		mv.setViewName("search/searchResult");
 		
 		return mv;
@@ -61,7 +62,7 @@ public class SearchController {
 	}
 	
 	@GetMapping("view")
-	public ModelAndView view(String id,HttpSession session) {
+	public ModelAndView view(String id, String date, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		String mid = "";
 		
@@ -81,6 +82,7 @@ public class SearchController {
 			className = "far";
 		}
 		
+		mv.addObject("date",date);
 		mv.addObject("vo",vo);
 		mv.addObject("review",review);
 		mv.addObject("menu",menu);

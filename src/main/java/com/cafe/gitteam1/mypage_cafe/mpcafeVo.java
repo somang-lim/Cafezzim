@@ -5,15 +5,11 @@ import java.util.List;
 
 public class mpcafeVo {
 	
-	private int cafe_id;
+	private String cafe_id;
 	private String cafe_name;
 	private String cafe_address;
 	private String title_photo;
 	private String cafe_detail;
-	String[] search_name;
-	Integer[] scname_id;
-	List<String> scnList = new ArrayList<String>();
-	List<Integer> scnidList = new ArrayList<Integer>();
 	
 	List<mpcafe_listVo> otherphotos = new ArrayList<mpcafe_listVo>();
 	List<mpcafe_listVo> cafesearch = new ArrayList<mpcafe_listVo>();
@@ -32,12 +28,6 @@ public class mpcafeVo {
 	
 	
 	//getter setter
-	public int getCafe_id() {
-		return cafe_id;
-	}
-	public void setCafe_id(int cafe_id) {
-		this.cafe_id = cafe_id;
-	}
 	public String getCafe_name() {
 		return cafe_name;
 	}
@@ -117,36 +107,17 @@ public class mpcafeVo {
 	public void setMenu(List<mpcafe_listVo> menu) {
 		this.menu = menu;
 	}
-
-	public List<String> getScnList() {
-		return scnList;
-	}
-	public void setScnList(List<String> scnList) {
-		this.scnList = scnList;
-	}
-	public List<Integer> getScnidList() {
-		return scnidList;
-	}
-	public void setScnidList(List<Integer> scnidList) {
-		this.scnidList = scnidList;
-	}
-	public String[] getSearch_name() {
-		return search_name;
-	}
-	public void setSearch_name(String[] search_name) {
-		this.search_name = search_name;
-	}
-	public Integer[] getScname_id() {
-		return scname_id;
-	}
-	public void setScname_id(Integer[] scname_id) {
-		this.scname_id = scname_id;
-	}
 	public List<dayoffVo> getOfflist() {
 		return offlist;
 	}
 	public void setOfflist(List<dayoffVo> offlist) {
 		this.offlist = offlist;
+	}
+	public String getCafe_id() {
+		return cafe_id;
+	}
+	public void setCafe_id(String cafe_id) {
+		this.cafe_id = cafe_id;
 	}
 
 

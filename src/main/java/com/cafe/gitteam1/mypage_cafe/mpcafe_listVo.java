@@ -1,9 +1,12 @@
 package com.cafe.gitteam1.mypage_cafe;
 
 public class mpcafe_listVo {
+	String cafe_id;
+	String photo_name;
 	String file_path;
 	String search_name;
 	int scname_id;
+	String menu_id;
 	String menu_name;
 	int menu_price;
 	int menu_type;
@@ -55,6 +58,30 @@ public class mpcafe_listVo {
 
 	public void setScname_id(int scname_id) {
 		this.scname_id = scname_id;
+	}
+
+	public String getCafe_id() {
+		return cafe_id;
+	}
+
+	public void setCafe_id(String cafe_id) {
+		this.cafe_id = cafe_id;
+	}
+
+	public String getMenu_id() {
+		return menu_id;
+	}
+
+	public void setMenu_id(String menu_id) {
+		this.menu_id = menu_id;
+	}
+
+	public String getPhoto_name() {
+		return photo_name;
+	}
+
+	public void setPhoto_name(String photo_name) {
+		this.photo_name = photo_name;
 	}
 
 }

@@ -21,7 +21,8 @@ import com.cafe.gitteam1.search.SearchService;
 public class ReservController {
 	
 SearchService service;
-	public static String uploadPath = "C:\\Users\\KIM Seong Kyeom\\eclipse-workspace\\gitteam1\\src\\main\\webapp\\upload\\";
+	public static String uploadPath = "/home/hosting_users/gitteam1/tomcat/webapps/upload/";
+	//public static String uploadPath = "C:\\Users\\KIM Seong Kyeom\\eclipse-workspace\\gitteam1\\src\\main\\webapp\\upload\\";
 	
 	@Autowired
 	public ReservController(SearchService service) {
