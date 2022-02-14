@@ -16,7 +16,8 @@
 <title>카페 예약 사이트</title>
 <%@include file="../common.jsp"%>
 <link href="css/board.css" rel="stylesheet" />
-<script src="js/notice.js"></script>
+<script src="js/qa.js"></script>
+<script src="js/summernote.js"></script>
 </head>
 
 
@@ -30,10 +31,12 @@
 	<section>
 		<div class="container">
 			<main class="form-board-notice-view">
-				<form name="frmBoard" method="post">
+				<form id="frmBoard" name="frmBoard" method="post" enctype="multipart/form-data">
 					<h1 class="h3 mb-4 fw-normal">Q&A</h1>
 					<!--테이블 ==========================================-->
-					<div class="ec-base-table typeWrite ">
+					<div class="ec-base-table typeWrite">
+						<input type="hidden" name="nowPage" value="${page.nowPage}"/>
+						<input type="hidden" name="qa_serial" value="${vo.qa_serial}"/>
 						<table class="table insert">
 							<colgroup>
 								<col style="width: 130px;" />
@@ -42,22 +45,37 @@
 							<tbody>
 								<tr class="subject">
 									<th scope="row">제목</th>
-									<td><input type="text" class="subjectText"></td>
+									<td><input type="text" class="subjectText" name="subject" id="subject" value="${vo.subject}"></td>
 								</tr>
 								<tr class="view">
-									<td colspan="2" class=""><textarea class="summernote"></textarea></td>
+									<td colspan="2" class="">
+										<textarea class="summernote" name="content" id="content">${vo.content}</textarea>
+									</td>
 								</tr>
 								<tr class="file">
 									<th scope="row">첨부파일</th>
-									<td><input type="file"></td>
+									<td>
+										<input type="file" name="file" class="form-control mb-3" id="qa_file" multiple="multiple">
+											<c:forEach var="file" items="${vo.qa_files}">
+												<div>
+													<input type="checkbox" id="${file.qa_origin_file}" value="${file.qa_file}" name="origin_file" style="width:20px; height:20px; margin-right:5px; position:relative; top:4px;">
+													<label for="origin_file">${file.qa_origin_file}</label>
+												</div>
+											</c:forEach>
+											<c:if test="${not empty vo.qa_files}">
+												<button type="button" id="btnDeleteFile" style="border:none; background-color:#fff; color:#616368; font-size: 15px; padding:0;">
+													<img src="./img/delete.png" style="width:19px; height:19px; margin-right:3px;">파일삭제
+												</button>
+											</c:if>
+									</td>
 								</tr>
 								<tr class="btnChooseZone">
 									<td>
 										<a href="qa" class="btn btn-outline-primary">목록</a>
 									</td>
 									<td class="btnSave">
-										<a href="qa" class="btn btn-primary">수정</a>
-										<a href="" class="btn btn-outline-dark">취소</a>
+										<button type="button" id="btnModifySave" class="btn btn-primary">수정</button>
+										<a href="qa" class="btn btn-outline-dark">취소</a>
 									</td>
 								</tr>
 							</tbody>

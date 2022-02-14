@@ -1,7 +1,6 @@
 package com.cafe.gitteam1.board;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class NoticeVo {
@@ -15,10 +14,12 @@ public class NoticeVo {
 	
 	private String content;
 	
-	private Date created_date;
+	private String created_date;
 	
-	// 첨부파일, summernote 이미지 list 추가
+	// 첨부파일
 	private List<NoticePhotoVo> notice_files = new ArrayList<NoticePhotoVo>();
+	
+	private List<String> notice_delete_files = new ArrayList<String>();
 	
 	private int file_cnt;
 	
@@ -53,10 +54,10 @@ public class NoticeVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getCreated_date() {
+	public String getCreated_date() {
 		return created_date;
 	}
-	public void setCreated_date(Date created_date) {
+	public void setCreated_date(String created_date) {
 		this.created_date = created_date;
 	}
 	public List<NoticePhotoVo> getNotice_files() {
@@ -65,7 +66,6 @@ public class NoticeVo {
 	public void setNotice_files(List<NoticePhotoVo> notice_files) {
 		this.notice_files = notice_files;
 	}
-	
 	public int getFile_cnt() {
 		return file_cnt;
 	}
@@ -73,11 +73,17 @@ public class NoticeVo {
 		this.file_cnt = file_cnt;
 	}
 	
+	public List<String> getNotice_delete_files() {
+		return notice_delete_files;
+	}
+	public void setNotice_delete_files(List<String> notice_delete_files) {
+		this.notice_delete_files = notice_delete_files;
+	}
+	
 	@Override
 	public String toString() {
 		return "NoticeVo [notice_serial=" + notice_serial + ", member_id=" + member_id + ", member_name=" + member_name
 				+ ", subject=" + subject + ", content=" + content + ", created_date=" + created_date + ", notice_files="
-				+ notice_files + ", file_cnt=" + file_cnt + "]";
+				+ notice_files + ", notice_delete_files=" + notice_delete_files + ", file_cnt=" + file_cnt + "]";
 	}
-	
 }

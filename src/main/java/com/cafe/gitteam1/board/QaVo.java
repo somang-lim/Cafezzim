@@ -1,6 +1,7 @@
 package com.cafe.gitteam1.board;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QaVo {
 	private int qa_serial;
@@ -13,16 +14,22 @@ public class QaVo {
 	
 	private String content;
 	
-	private Date created_date;
+	private String created_date;
 	
 	private boolean isSecret;
 	
 	private int grpno;
 	
-	private int grpord;
-	
 	private int depth;
-
+	
+	private String repl_id;
+	
+	// 첨부파일
+	private List<QaPhotoVo> qa_files = new ArrayList<QaPhotoVo>();
+	
+	private List<String> qa_delete_files = new ArrayList<String>();
+	
+	private int file_cnt;
 	
 	public int getQa_serial() {
 		return qa_serial;
@@ -54,10 +61,10 @@ public class QaVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getCreated_date() {
+	public String getCreated_date() {
 		return created_date;
 	}
-	public void setCreated_date(Date created_date) {
+	public void setCreated_date(String created_date) {
 		this.created_date = created_date;
 	}
 	public boolean isSecret() {
@@ -72,24 +79,43 @@ public class QaVo {
 	public void setGrpno(int grpno) {
 		this.grpno = grpno;
 	}
-	public int getGrpord() {
-		return grpord;
-	}
-	public void setGrpord(int grpord) {
-		this.grpord = grpord;
-	}
 	public int getDepth() {
 		return depth;
 	}
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+	public String getRepl_id() {
+		return repl_id;
+	}
+	public void setRepl_id(String repl_id) {
+		this.repl_id = repl_id;
+	}
+	public List<QaPhotoVo> getQa_files() {
+		return qa_files;
+	}
+	public void setQa_files(List<QaPhotoVo> qa_files) {
+		this.qa_files = qa_files;
+	}
+	public List<String> getQa_delete_files() {
+		return qa_delete_files;
+	}
+	public void setQa_delete_files(List<String> qa_delete_files) {
+		this.qa_delete_files = qa_delete_files;
+	}
+	
+	public int getFile_cnt() {
+		return file_cnt;
+	}
+	public void setFile_cnt(int file_cnt) {
+		this.file_cnt = file_cnt;
+	}
 	
 	@Override
 	public String toString() {
 		return "QaVo [qa_serial=" + qa_serial + ", member_id=" + member_id + ", member_name=" + member_name
 				+ ", subject=" + subject + ", content=" + content + ", created_date=" + created_date + ", isSecret="
-				+ isSecret + ", grpno=" + grpno + ", grpord=" + grpord + ", depth=" + depth + "]";
+				+ isSecret + ", grpno=" + grpno + ", depth=" + depth + ", repl_id=" + repl_id + ", qa_files=" + qa_files
+				+ ", qa_delete_files=" + qa_delete_files + ", file_cnt=" + file_cnt + "]";
 	}
-	
 }

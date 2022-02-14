@@ -16,6 +16,7 @@ public class CafeInfoVo {
 	private List<ReviewVo> review;
 	private String cond;
 	private String offdate;
+	private List<String> photos;
 	
 	
 	public String getCid() {
@@ -99,6 +100,12 @@ public class CafeInfoVo {
 	public void setOffdate(String offdate) {
 		this.offdate = offdate;
 	}
+	public List<String> getPhotos() {
+		return photos;
+	}
+	public void setPhotos(List<String> photos) {
+		this.photos = photos;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -128,6 +135,8 @@ public class CafeInfoVo {
 		builder.append(cond);
 		builder.append(", offdate=");
 		builder.append(offdate);
+		builder.append(", photos=");
+		builder.append(photos);
 		builder.append("]");
 		return builder.toString();
 	}

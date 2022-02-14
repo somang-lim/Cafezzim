@@ -210,11 +210,11 @@ input[class="secretYn"] {
 }
 
 .form-board-qa .subject {
-	padding-left: 60px;
+	padding-left: 20px;
 }
 
 .form-board-qa .num {
-	padding-left: 20px;
+	text-align: center;
 }
 
 .form-board-qa .writer-name {
@@ -223,6 +223,10 @@ input[class="secretYn"] {
 
 .form-board-qa .write-day {
 	text-align: center;
+}
+
+.form-board-qa .qa_insert {
+	text-align: right;
 }
 
 .form-board-qa-view {

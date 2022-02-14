@@ -3,7 +3,6 @@ package com.cafe.gitteam1.mypage_cafe;
 public class mpcafe_listVo {
 	String cafe_id;
 	String photo_name;
-	String file_path;
 	String search_name;
 	int scname_id;
 	String menu_id;
@@ -12,14 +11,6 @@ public class mpcafe_listVo {
 	int menu_type;
 
 	//setter getter
-	public String getFile_path() {
-		return file_path;
-	}
-
-	public void setFile_path(String file_path) {
-		this.file_path = file_path;
-	}
-
 	public String getSearch_name() {
 		return search_name;
 	}

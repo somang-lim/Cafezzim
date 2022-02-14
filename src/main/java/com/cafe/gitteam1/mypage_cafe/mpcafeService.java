@@ -19,7 +19,7 @@ import com.cafe.gitteam1.mypage_cafe.mpcafe_listVo;
 @Service
 @Transactional
 public class mpcafeService {
-	public static String uploadPath="/Users/minji/Desktop/저장/Cafezzim-master/src/main/resources/static/img/gallery";
+	public static String uploadPath="/home/hosting_users/gitteam1/tomcat/webapps/upload/";
 	
 	@Autowired
 	mpcafeMapper mapper;
@@ -33,10 +33,8 @@ public class mpcafeService {
 	
 	public List<mpcafeVo> search(String findStr){
 		List<mpcafeVo> list = null;
-		list = mapper.search(findStr);
-		
-		return list;
-		
+		list = mapper.search(findStr);		
+		return list;		
 	}
 	
 	public mpcafeVo dayoffSelect(String cafe_id){
@@ -44,10 +42,8 @@ public class mpcafeService {
 		vo = mapper.view(cafe_id);
 		List<dayoffVo> offlist = null;
 		offlist = mapper.dayoffSelect(cafe_id);
-		vo.setOfflist(offlist);
-		
+		vo.setOfflist(offlist);		
 		return vo;
-		
 	}
 	
 	public mpcafeVo view(String cafe_id) { //cafe_id를 사용해서 호출
@@ -77,62 +73,45 @@ public class mpcafeService {
 		status = manager.getTransaction(new DefaultTransactionDefinition());
 		boolean b = false;
 		Object savePoint = null;
-		mpcafe_listVo lvo = null;
 		
 	try {
 		savePoint = status.createSavepoint();
 		int c = mapper.modify(vo); //기본카페정보만 수정
-		
-		if(c>0) { //기본카페정보가 수정되면
-			
-			/*다른 테이블값 수정
-			for(String i: vo.scnList){ //여기서 반복실행이 필요함.. 뭘기준으로 할지.lvo도 세번 업데이트
-				for(Integer j: vo.scnidList) {
-					lvo.setSearch_name(i);
-					lvo.setScname_id(j);
-					
-					System.out.println(i);
-					System.out.println(j);
-					
-					mapper.scnmodify(lvo);
-				}
-			}
-			*/
-			
-			manager.commit(status);
-			b=true;
-			
-			}else {
-				status.rollbackToSavepoint(savePoint);
-			}
-	}catch(Exception ex) {
-		ex.printStackTrace();
-	}
-	return b;
-	}
-	
-	public boolean scnmodify(mpcafeVo vo) {
-		boolean b = false;
-		status = manager.getTransaction(new DefaultTransactionDefinition());
-		
-		int c = 0;
-		try {
-			for(mpcafe_listVo lvo: vo.getCafesearch()) {
-				c += mapper.scnmodify(lvo);
-			}
-			if(c == vo.getCafesearch().size()) {
-				manager.commit(status);
-				b = true;
-			}else {
-				manager.rollback(status);
-			}
+		b=true;
+
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return b;	
-		
+		return b;
 	}
 	
+	public boolean scnmodify(mpcafeVo vo) {
+		boolean c = false;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		//기존 search_name 삭제
+		int d = mapper.deleteScn(vo.getCafe_id());
+		System.out.println(d);		
+		if(d>0) { //기존 search_name가 삭제되면
+			int e = 0;
+			try {
+				//새로운 검색어 저장
+				for(mpcafe_listVo lvo: vo.getCafesearch()){ //반복해서 검색어 insert실행			
+						e += mapper.scnInsert(lvo);	
+						System.out.println(lvo.getCafe_id() + lvo.getSearch_name());
+				}
+				if(e == vo.getCafesearch().size()) {
+					manager.commit(status);
+					c=true;
+				}else {
+					manager.rollback(status);
+				}
+				
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}return c;
+		
+	}
 	
 	
 	public boolean insertOff(dayoffVo dvo) {
@@ -140,6 +119,22 @@ public class mpcafeService {
 		status = manager.getTransaction(new DefaultTransactionDefinition());
 		
 			int c = mapper.insertOff(dvo);
+			if(c>0) {
+				manager.commit(status);
+				b = true;
+			}else {
+				manager.rollback(status);
+			}
+
+		return b;
+		
+	}
+	
+	public boolean insertOffday(dayoffVo dvo) {
+		boolean b = false;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		
+			int c = mapper.insertOffday(dvo);
 			if(c>0) {
 				manager.commit(status);
 				b = true;
@@ -221,15 +216,15 @@ public class mpcafeService {
 		
 	}
 
-	public boolean deleteOtherphoto(String file_path) {
+	public boolean deleteOtherphoto(String photo_name) {
 		boolean b = false;
 		status = manager.getTransaction(new DefaultTransactionDefinition());
 		
-		int c = mapper.deleteOtherphoto(file_path);
+		int c = mapper.deleteOtherphoto(photo_name);
 		if(c>0) {
 			manager.commit(status);
 			b = true;
-			File delFile = new File("/Users/minji/Desktop/저장/Cafezzim-master/src/main/resources/static/" + file_path); 
+			File delFile = new File(uploadPath + photo_name); 
 			if(delFile.exists()) delFile.delete();
 		}else {
 			manager.rollback(status);
@@ -259,34 +254,7 @@ public class mpcafeService {
 		}else {
 			manager.rollback(status);
 		}
-		return b;	
-		
+		return b;			
 	}
-
-	
-	/*
-	public boolean titleModify(mpcafeVo vo) {
-	
-		status = manager.getTransaction(new DefaultTransactionDefinition());
-		boolean b = false;
-		Object savePoint = null;
-		
-	try {
-		savePoint = status.createSavepoint();
-		int c = mapper.titleModify(vo); //기본카페정보만 수정
-		
-		if(c>0) {//DB가 업데이트되면 커밋									
-			manager.commit(status);
-			b=true;
-			
-			}else {
-				status.rollbackToSavepoint(savePoint);
-			}
-	}catch(Exception ex) {
-		ex.printStackTrace();
-	}
-	return b;
-	}
-	*/
 
 }

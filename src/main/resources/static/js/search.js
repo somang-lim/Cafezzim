@@ -12,7 +12,7 @@ ScrollTrigger.create({
     trigger: srchResult,
     start: "top 50%",
     end: "bottom 50%",
-		//markers:true, // 동작 타이밍 확인 용 마커, 필요없으면 삭제하면됨
+		markers:true, // 동작 타이밍 확인 용 마커, 필요없으면 삭제하면됨
     onUpdate: (self) => {
         let progress = self.progress.toFixed(2);
         if (progress >= 0.9 && self.direction === 1) {

@@ -94,12 +94,6 @@ public class mpcafeVo {
 	public void setOtherphotos(List<mpcafe_listVo> otherphotos) {
 		this.otherphotos = otherphotos;
 	}
-	public List<mpcafe_listVo> getCafesearch() {
-		return cafesearch;
-	}
-	public void setCafesearch(List<mpcafe_listVo> cafesearch) {
-		this.cafesearch = cafesearch;
-	}
 
 	public List<mpcafe_listVo> getMenu() {
 		return menu;
@@ -119,7 +113,11 @@ public class mpcafeVo {
 	public void setCafe_id(String cafe_id) {
 		this.cafe_id = cafe_id;
 	}
-
-
+	public List<mpcafe_listVo> getCafesearch() {
+		return cafesearch;
+	}
+	public void setCafesearch(List<mpcafe_listVo> cafesearch) {
+		this.cafesearch = cafesearch;
+	}
 
 }

@@ -17,6 +17,7 @@
 <%@include file="../common.jsp"%>
 <link href="css/board.css" rel="stylesheet" />
 <script src="js/notice.js"></script>
+<script src="js/summernote.js"></script>
 </head>
 
 
@@ -39,7 +40,7 @@
 						<input type="hidden" name="member_name" value="${sessionScope.name}">
 						<table class="table insert">
 							<colgroup>
-								<col style="width: 130px;" />
+								<col style="width: 100px;" />
 								<col style="width: auto;" />
 							</colgroup>
 							<tbody>

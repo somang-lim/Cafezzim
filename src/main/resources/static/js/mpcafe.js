@@ -8,6 +8,21 @@ function show_select(){
 	$("#select-time").show();
 };
 
+function show_fileupload(){
+	$("#imageadd").show();
+	$("#plus-photo").hide();
+}
+
+function show_drinkadd(){
+	$("#drinkadd").show();
+	$("#plus-drink").hide();
+}
+
+function show_foodadd(){
+	$("#foodadd").show();
+	$("#plus-food").hide();
+}
+
 function hide_select(){
 	$("#select-time").hide();
 }
@@ -81,13 +96,13 @@ $(function() {
 		$frm.action = "fileSave";
 		$frm.submit();		
 	})
-	
+
 	$('#btnTitlephoto').click(function() {
 		$frm = $('#frm_titleupload')[0];
 		$frm.enctype = "multipart/form-data";
 		$frm.action = "titlemodify";
 		$frm.submit();	
 	})
-	
+
 
 })

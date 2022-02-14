@@ -34,7 +34,7 @@
 					<h1 class="h3 mb-4 fw-normal">notice</h1>
 					<!--테이블 ==========================================-->
 					<div class="ec-base-table typeWrite ">
-						<input type="hidden" name="page" value="${page.nowPage}"/>
+						<input type="hidden" name="nowPage" value="${page.nowPage}"/>
 						<input type="hidden" name="notice_serial"  value="${vo.notice_serial}"/>
 						<table class="table view">
 							<colgroup>
@@ -51,19 +51,21 @@
 									<td>${vo.member_name}</td>
 								</tr>
 								<tr class="content">
-									<td colspan="2" class="main-text">${vo.content}</td>
+									<td colspan="2" class="main-text" style="max-width: 100%">${vo.content}</td>
 								</tr>
 								<c:if test="${not empty vo.notice_files}">
 									<tr class="fileZone">
 										<th scope="row">첨부파일</th>
 										<td class="notice_file">
-											<c:forEach var="file" items="${vo.notice_files}">
-												<li>
-													<a href="upload/notice/${file.notice_file}" download>
-														${file.notice_file}
-													</a>
-												</li>
-											</c:forEach>
+											<ul>
+												<c:forEach var="file" items="${vo.notice_files}">
+													<li>
+														<a href="upload/notice/${file.notice_file}" download>
+															${file.notice_origin_file}
+														</a>
+													</li>
+												</c:forEach>
+											</ul>
 										</td>
 									</tr>
 								</c:if>
@@ -73,8 +75,8 @@
 									</td>
 									<c:if test="${sessionScope.grade eq 'master'}">
 										<td class="btnSave">
+											<a href="${path}/notice_modify?notice_serial=${vo.notice_serial}" class="btn btn-primary">수정</a>
 											<button id="btnDelete" class="btn btn-outline-danger">삭제</button>
-											<a href="${path}/notice_modify?notice_serial=${vo.notice_serial}" class="btn btn-outline-primary">수정</a>
 										</td>
 									</c:if>
 								</tr>

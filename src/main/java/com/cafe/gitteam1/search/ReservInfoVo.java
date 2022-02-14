@@ -5,6 +5,7 @@ public class ReservInfoVo {
 	private int cid;
 	private String cname;
 	private String mid;
+	private String photo;
 	private int isCancelled;
 	private String rdate;
 	private String rtime;
@@ -56,6 +57,16 @@ public class ReservInfoVo {
 
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 
@@ -171,10 +182,41 @@ public class ReservInfoVo {
 
 	@Override
 	public String toString() {
-		return "ReservInfoVo [rid=" + rid + ", cid=" + cid + ", cname=" + cname + ", mid=" + mid + ", isCancelled="
-				+ isCancelled + ", rdate=" + rdate + ", rtime=" + rtime + ", rname=" + rname + ", phone=" + phone
-				+ ", r4seats=" + r4seats + ", r2seats=" + r2seats + ", request=" + request + ", price=" + price
-				+ ", method=" + method + ", pdate=" + pdate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ReservInfoVo [rid=");
+		builder.append(rid);
+		builder.append(", cid=");
+		builder.append(cid);
+		builder.append(", cname=");
+		builder.append(cname);
+		builder.append(", mid=");
+		builder.append(mid);
+		builder.append(", photo=");
+		builder.append(photo);
+		builder.append(", isCancelled=");
+		builder.append(isCancelled);
+		builder.append(", rdate=");
+		builder.append(rdate);
+		builder.append(", rtime=");
+		builder.append(rtime);
+		builder.append(", rname=");
+		builder.append(rname);
+		builder.append(", phone=");
+		builder.append(phone);
+		builder.append(", r4seats=");
+		builder.append(r4seats);
+		builder.append(", r2seats=");
+		builder.append(r2seats);
+		builder.append(", request=");
+		builder.append(request);
+		builder.append(", price=");
+		builder.append(price);
+		builder.append(", method=");
+		builder.append(method);
+		builder.append(", pdate=");
+		builder.append(pdate);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

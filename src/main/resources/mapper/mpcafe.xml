@@ -11,7 +11,7 @@ or cafe_name like '%${findStr}%'
 </select>
 
 <select id="dayoffSelect" parameterType="String" resultType="com.cafe.gitteam1.mypage_cafe.dayoffVo">
-	select off_id, cafe_id, off_date, DATE_FORMAT(start_time, '%H:%i') start_time, DATE_FORMAT(end_time, '%H:%i') end_time, off_type from dayoff where cafe_id = ${cafe_id}
+	select off_id, cafe_id, off_date, DATE_FORMAT(start_time, '%H:%i') start_time, DATE_FORMAT(end_time, '%H:%i') end_time, off_type from dayoff where cafe_id = ${cafe_id} and off_date > CURRENT_DATE() ORDER BY off_date ASC;
 </select>
 
 <select id="view" parameterType="String" resultType="com.cafe.gitteam1.mypage_cafe.mpcafeVo">
@@ -19,7 +19,7 @@ or cafe_name like '%${findStr}%'
 </select>
 
 <select id="otherphotos" parameterType="String" resultType="com.cafe.gitteam1.mypage_cafe.mpcafe_listVo">
-	select file_path from other_photo where cafe_id = #{cafe_id}
+	select photo_name from other_photo where cafe_id = #{cafe_id}
 </select>
 
 <select id="cafesearch" parameterType="String" resultType="com.cafe.gitteam1.mypage_cafe.mpcafe_listVo">
@@ -40,19 +40,24 @@ or cafe_name like '%${findStr}%'
 	where cafe_id = #{cafe_id}
 </update>
 
-<update id="scnmodify" parameterType="com.cafe.gitteam1.mypage_cafe.mpcafe_listVo">	   
-     update cafe_searchname set search_name=${search_name}
-     where scname_id=${scname_id}
-</update>
-
 <insert id="insertOff" parameterType="com.cafe.gitteam1.mypage_cafe.dayoffVo">
 	insert into dayoff(cafe_id, off_date, start_time, end_time, off_type)
-	values (#{cafe_id}, #{off_date}, IFNULL(#{start_time}, null), IFNULL(#{end_time}, null), #{off_type})
+	values (#{cafe_id}, #{off_date}, #{start_time}, #{end_time}, #{off_type})
+</insert>
+
+<insert id="insertOffday" parameterType="com.cafe.gitteam1.mypage_cafe.dayoffVo">
+	insert into dayoff(cafe_id, off_date, off_type)
+	values (#{cafe_id}, #{off_date}, #{off_type})
 </insert>
 
 <insert id="insertMenu" parameterType="com.cafe.gitteam1.mypage_cafe.mpcafe_listVo">
 	insert into menu(cafe_id, menu_name, menu_price, menu_type)
 	values (#{cafe_id}, #{menu_name}, #{menu_price}, #{menu_type})
+</insert>
+
+<insert id="scnInsert" parameterType="com.cafe.gitteam1.mypage_cafe.mpcafe_listVo">
+	insert into cafe_searchname(cafe_id, search_name)
+	values (#{cafe_id}, #{search_name})
 </insert>
 
 <delete id="deleteOff" parameterType="String">
@@ -63,12 +68,16 @@ or cafe_name like '%${findStr}%'
 	delete from menu where menu_id=#{menu_id}
 </delete>
 
+<delete id="deleteScn" parameterType="String">
+	delete from cafe_searchname where cafe_id=#{cafe_id}
+</delete>
+
 <insert id="attInsert" parameterType="com.cafe.gitteam1.mypage_cafe.mpcafe_listVo">
-		insert into other_photo(cafe_id, photo_name, file_path) values(#{cafe_id}, #{photo_name}, #{file_path})
+		insert into other_photo(cafe_id, photo_name) values(#{cafe_id}, #{photo_name})
 </insert>
 
 <delete id="deleteOtherphoto" parameterType="String">
-	delete from other_photo where file_path=#{file_path}
+	delete from other_photo where photo_name=#{photo_name}
 </delete>
 
 </mapper>

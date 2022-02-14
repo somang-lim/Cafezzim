@@ -10,8 +10,8 @@
 						<a
 							class="pe-2 d-flex align-items-center text-decoration-none fw-bold fs-3"
 							href="#">
-							<div class="text-warning">App</div>
-							<div class="text-white">Lab</div>
+							<div class="text-warning">Cafe</div>
+							<div class="text-white">Zzim</div>
 						</a>
 					</div>
 				</div>
@@ -19,16 +19,15 @@
 					<div class="col-auto mb-5">
 						<ul class="list-unstyled list-inline mb-0">
 							<li class="list-inline-item me3 me-sm-4"><a
-								class="text-light text-decoration-none" href="#!">Home</a></li>
+								class="text-light text-decoration-none" href="/">Home</a></li>
 							<li class="list-inline-item me3 me-sm-4"><a
-								class="text-light text-decoration-none" href="#!">Key
-									Features</a></li>
+								class="text-light text-decoration-none" href="#location">Search</a></li>
 							<li class="list-inline-item me3 me-sm-4"><a
-								class="text-light text-decoration-none" href="#!">Pricing</a></li>
+								class="text-light text-decoration-none" href="notice">Notice</a></li>
 							<li class="list-inline-item me3 me-sm-4"><a
-								class="text-light text-decoration-none" href="#!">Testimonial</a></li>
+								class="text-light text-decoration-none" href="qa">Q&A</a></li>
 							<li class="list-inline-item me3 me-sm-4"><a
-								class="text-light text-decoration-none" href="#!">FAQ</a></li>
+								class="text-light text-decoration-none" href="#faq">FAQ</a></li>
 						</ul>
 					</div>
 				</div>
@@ -36,12 +35,12 @@
 					<div class="col-auto mb-5">
 						<ul class="list-unstyled list-inline">
 							<li class="list-inline-item me-3"><a
-								class="text-decoration-none" href="#!"> <svg
-										class="bi bi-facebook" xmlns="http://www.w3.org/2000/svg"
-										width="32" height="32" fill="#7D7987" viewBox="0 0 16 16">
-                      <path
-											d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
-                    </svg></a></li>
+								class="text-decoration-none" href="https://github.com/CafeZzim/Cafezzim"> <svg 
+									xmlns="http://www.w3.org/2000/svg" width="32" height="32" 
+									fill="#7D7987" viewBox="0 0 24 24">
+									<path 
+									d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+									</svg></a></li>
 							<li class="list-inline-item me-3"><a href="#!"> <svg
 										class="bi bi-twitter" xmlns="http://www.w3.org/2000/svg"
 										width="32" height="32" fill="#7D7987" viewBox="0 0 16 16">
@@ -66,15 +65,7 @@
 				<div class="row flex-center">
 					<div class="col-auto">
 						<p class="mb-0 fs--1 text-700">
-							&copy; This template is made with&nbsp;
-							<svg class="bi bi-suit-heart-fill"
-								xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-								fill="#ffffff" viewBox="0 0 16 16">
-                  <path
-									d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
-                </svg>
-							&nbsp;by&nbsp;<a class="text-700" href="https://themewagon.com/"
-								target="_blank">ThemeWagon </a>
+							&copy; gitteam1&nbsp;
 						</p>
 					</div>
 				</div>

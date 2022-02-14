@@ -103,7 +103,7 @@
 										<div class="d-flex">
 											<div class="search-item-img">
 												<div class="img-wrap">
-													<img src="../img/gallery/${vo.thumb }" class="img-fluid" alt="서울,경기">
+													<img src="upload/${vo.thumb }" class="img-fluid" alt="서울,경기">
 												</div>
 											</div>
 											<div class="search-item-desc py-3 px-3">
@@ -126,7 +126,7 @@
 									<div class="d-flex">
 										<div class="search-item-img">
 											<div class="img-wrap">
-												<img src="../img/gallery/${vo2.thumb }" class="img-fluid" alt="서울,경기">
+												<img src="upload/${vo2.thumb }" class="img-fluid" alt="서울,경기">
 											</div>
 										</div>
 										<div class="search-item-desc py-3 px-3">

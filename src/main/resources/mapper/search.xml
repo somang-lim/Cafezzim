@@ -59,12 +59,16 @@
 	HAVING C.cafe_id=#{_parameter};
 	</select>
 	
+	<select id="viewOtherPhoto" resultType="String">
+	select photo_name as photoName from other_photo where cafe_id=#{_parameter}
+	</select>
+	
 	<select id="viewReview" resultType="com.cafe.gitteam1.search.ReviewVo">
 	select cafe_id as cid, member_id as mid, review_score as score, review_content as content, review_photo as photo from review where cafe_id=${_parameter}
 	</select>
 	
 	<select id="viewMenu" resultType="com.cafe.gitteam1.search.MenuVo">
-	SELECT menu_name as name, menu_price as price, menu_type as type FROM menu WHERE cafe_id=1
+	SELECT menu_name as name, menu_price as price, menu_type as type FROM menu WHERE cafe_id=#{_parameter}
 	</select>
 	
 	<select id="viewReserv" resultType="com.cafe.gitteam1.search.ReservInfoVo">

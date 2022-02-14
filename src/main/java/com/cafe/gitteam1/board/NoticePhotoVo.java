@@ -5,6 +5,8 @@ public class NoticePhotoVo {
 	
 	private String notice_file;
 	
+	private String notice_origin_file;
+	
 	private int notice_serial;
 
 	
@@ -26,11 +28,17 @@ public class NoticePhotoVo {
 	public void setNotice_serial(int notice_serial) {
 		this.notice_serial = notice_serial;
 	}
-
+	public String getNotice_origin_file() {
+		return notice_origin_file;
+	}
+	public void setNotice_origin_file(String notice_origin_file) {
+		this.notice_origin_file = notice_origin_file;
+	}
+	
 	@Override
 	public String toString() {
-		return "NoticePhotoVo [photo_serial=" + photo_serial + ", notice_file=" + notice_file + ", notice_serial="
-				+ notice_serial + "]";
+		return "NoticePhotoVo [photo_serial=" + photo_serial + ", notice_file=" + notice_file + ", notice_origin_file="
+				+ notice_origin_file + ", notice_serial=" + notice_serial + "]";
 	}
 	
 }

@@ -102,7 +102,7 @@ let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.g
 						<div class="col-md-6 col-lg-3">
 							<a href="reserv_info?id=${vo.reserve_id }" class="location-item card shadow-lg mb-4 border-0">
 								<div class="location-img">
-									<img src="../img/gallery/${vo.img }" class="img-fluid">
+									<img src="upload/${vo.img }" class="img-fluid">
 								</div>
 								<div class="location-desc pt-1 px-4">
 									<h4>${vo.cname }</h4>
@@ -129,7 +129,7 @@ let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.g
 						<div class="col-md-6 col-lg-3">
 							<a href="reserv_info?id=${vo.reserve_id }" class="location-item card shadow-lg mb-0 border-0">
 								<div class="location-img">
-									<img src="../img/gallery/${vo.img }" class="img-fluid">
+									<img src="upload/${vo.img }" class="img-fluid">
 								</div>
 								<div class="location-desc pt-1 px-4">
 									<h4>${vo.cname }</h4>

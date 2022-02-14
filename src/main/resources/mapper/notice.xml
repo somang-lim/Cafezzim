@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe.gitteam1.board.BoardMapper">
-	<select id="totSize" parameterType="String" resultType="Integer">
+	
+	<!-- notice -->
+	<select id="notice_totSize" parameterType="String" resultType="Integer">
 		SELECT count(notice_serial) totSize
 		  FROM notice
-		 WHERE subject     like '%${_parameter}%'
-		    OR content     like '%${_parameter}%'
-		  	OR member_name like '%${_parameter}%'
-		    OR member_id   like '%${_parameter}%'
+			WHERE subject like '%${_parmater}%'
+    	   OR content like '%${_parameter}%'
 	</select>
 	
-	<select id="notice_search" parameterType="com.cafe.gitteam1.board.Page" resultType="com.cafe.gitteam1.board.NoticeVo">
-		SELECT notice_serial, member_name, subject, content
-		  FROM notice
-		  <if test="notice_sort != null">
-			 WHERE
-			 <choose>
-					<when test="notice_sort eq 'subject'">subject like '%${notice_search}%'</when>
-			    <when test="notice_sort eq 'content'">content like '%${notice_search}%'</when>
-			 </choose> 
-		  </if>
+	<select id="notice_search" parameterType="com.cafe.gitteam1.board.NoticePage" resultType="com.cafe.gitteam1.board.NoticeVo">
+		SELECT notice_serial, member_name, subject, content,
+					 (SELECT COUNT(photo_serial) FROM notice_photo WHERE notice_serial = n.notice_serial) file_cnt
+		  FROM notice n
+		 WHERE subject like '%${notice_search}%'
+   	    OR content like '%${notice_search}%'
 		 ORDER BY notice_serial DESC
 		 LIMIT ${startNo-1}, ${listSize}
 	</select>
@@ -31,7 +27,7 @@
 	</select>
 	
 	<select id="notice_show_file" parameterType="String" resultType="com.cafe.gitteam1.board.NoticePhotoVo">
-		SELECT notice_file
+		SELECT notice_file, notice_origin_file
 		  FROM notice_photo
 		 WHERE notice_serial = #{_parameter}
 	</select>
@@ -42,17 +38,20 @@
 	</insert>
 	
 	<select id="last_insert_id" resultType="Integer">
-		SELECT last_insert_id();
+		SELECT last_insert_id()
 	</select>
 	
 	<insert id="notice_insert_photo" parameterType="com.cafe.gitteam1.board.NoticePhotoVo">
-		INSERT INTO notice_photo(notice_file, notice_serial)
-		VALUES (#{notice_file}, #{notice_serial})
+		INSERT INTO notice_photo(notice_file, notice_origin_file, notice_serial)
+		VALUES (#{notice_file}, #{notice_origin_file}, #{notice_serial})
 	</insert>
 
-	<delete id="notice_delete_photo" parameterType="com.cafe.gitteam1.board.NoticePhotoVo">
+	<delete id="notice_modify_file" parameterType="List">
 		DELETE FROM notice_photo
-		 WHERE notice_file = #{notice_file}
+		 WHERE notice_file in
+		 <foreach collection="list" item="file" open="(" close=")" separator=",">
+		 	#{file}
+		 </foreach>
 	</delete>
 
 	<update id="notice_modify" parameterType="com.cafe.gitteam1.board.NoticeVo">
@@ -66,8 +65,15 @@
 		 WHERE notice_serial = #{_parameter}
 	</delete>
 	
+	<select id="notice_file_list" parameterType="String" resultType="com.cafe.gitteam1.board.NoticePhotoVo">
+		SELECT photo_serial, notice_file, notice_origin_file, notice_serial
+		  FROM notice_photo
+		 WHERE notice_serial = #{_parameter}
+	</select>
+	
 	<delete id="notice_delete_file" parameterType="String">
 		DELETE FROM notice_photo
 		 WHERE notice_serial = #{_parameter}
 	</delete>
+	
 </mapper>

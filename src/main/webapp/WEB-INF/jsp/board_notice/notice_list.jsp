@@ -35,13 +35,8 @@
 					<div class="searchZone mb-3">
 						<input id="notice_serial" name="notice_serial" type="hidden">
 						<input id="nowPage" name="nowPage" value="${page.nowPage}" type="hidden">
-						<input id="board_sort" name="board_sort" value="" type="hidden">
-						<select id="notice_sort" class="search_key" name="notice_sort">
-							<option value="subject" selected>제목</option>
-							<option value="content">내용</option>
-						</select>
-						<input id="notice_search" name="notice_search" class="inputTypeText" placeholder="" value="${page.notice_search}" type="search">
-						<button id="btnNoticeSearch" class="btnNormal">찾기</button>
+						<input id="notice_search" name="notice_search" class="inputTypeText" placeholder="검색어를 입력하세요." value="${page.notice_search}" type="search">
+						<button type="button" id="btnNoticeSearch" class="btnNormal">찾기</button>
 					</div>
 				</form>
 				<!--테이블 ==========================================-->
@@ -50,7 +45,7 @@
 						<tr>
 							<th scope="col" class="notice_serial" style="width: 8%">NO</th>
 							<th scope="col" class="subject" style="width: 60%">제목</th>
-							<th scope="col" class="writer_name" style="width: 15%">작성자</th>
+							<th scope="col" class="writer_name" style="width: 18%">작성자</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -59,10 +54,13 @@
 								<td scope="row" class="num">${vo.notice_serial}</td>
 								<td class="subject">
 									<span>
-										<a href="${path}/notice_view?notice_serial=${vo.notice_serial}">${vo.subject}</a>
+										<a href="${path}/notice_view?notice_serial=${vo.notice_serial}" style="font-size: 0.9rem">${vo.subject}</a>
+										<c:if test="${vo.file_cnt > 0}">
+											<img src="./img/paper-clip.png" style="width:15px; height: 15px;">
+										</c:if>
 									</span>
 								</td>
-								<td class="writer-name">${vo.member_name}</td>
+								<td class="writer-name" style="font-size: 0.9rem">${vo.member_name}</td>
 							</tr>
 						</c:forEach>
 						<c:if test="${sessionScope.grade eq 'master'}">
@@ -80,17 +78,17 @@
 						<ul class="pagination pagination-sm justify-content-center">
 							<c:if test="${page.startPage > 1}">
 								<li class="page-item">
-									<a class="page-link" onclick="board.page(${page.startPage-1})" aria-label="Previous">
+									<a class="page-link" onclick="notice.page(${page.startPage-1})" aria-label="Previous">
 										<span aria-hidden="true">&laquo;</span>
 									</a>
 								</li>
 							</c:if>
 							<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-								<li class="page-item"><a class="page-link" onclick="board.page(${i})">${i}</a></li>
+								<li class="page-item"><a class="page-link" onclick="notice.page(${i})">${i}</a></li>
 							</c:forEach>
 							<c:if test="${page.endPage < page.totPage}">
 								<li class="page-item">
-									<a class="page-link" onclick="board.page(${page.endPage+1})" aria-label="Next">
+									<a class="page-link" onclick="notice.page(${page.endPage+1})" aria-label="Next">
 										<span aria-hidden="true">&raquo;</span>
 									</a>
 								</li>

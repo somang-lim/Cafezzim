@@ -1,8 +1,13 @@
 package com.cafe.gitteam1.ctrl;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,28 +35,61 @@ SearchService service;
 	}
 
 	@RequestMapping("/reserv_info")
-	public ModelAndView reservInfo(String id) {
+	public ModelAndView reservInfo(String id, HttpSession session, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		ReservInfoVo vo = service.viewReserv(id);
 		List<MenuVo> menu = service.viewReservMenu(id);
+		String mid = "";
+		String ReserveMid = (vo.getMid()!=null)? vo.getMid() : "";
+		
+		
+		if(session.getAttribute("member_id") != null) {
+			mid = (String) session.getAttribute("member_id");
+		}
+		
 		
 		mv.addObject("vo",vo);
 		mv.addObject("menu",menu);
 		
-		mv.setViewName("myPage/reserv_info");
+		mv.setViewName("redirect:/");
+		
+		if(mid.equals(ReserveMid)) {
+			mv.setViewName("myPage/reserv_info");
+		}
+		
 		return mv;
 	}
 	
 	@RequestMapping("/review")
-	public ModelAndView review(String rid) {
+	public ModelAndView review(String rid, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		ReservInfoVo vo = service.viewReserv(rid);
 		List<MenuVo> menu = service.viewReservMenu(rid);
+		String mid = "";
+		String ReserveMid = (vo.getMid()!=null)? vo.getMid() : "";
 		
+		
+		if(session.getAttribute("member_id") != null) {
+			mid = (String) session.getAttribute("member_id");
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String now = sdf.format(new Date());
+		
+		if(now.compareTo(vo.getRdate()) == -1) {
+			System.out.println("미래");
+		}
+
 		mv.addObject("vo",vo);
 		mv.addObject("menu",menu);
+		mv.setViewName("redirect:/");
 		
-		mv.setViewName("myPage/review");
+		if(mid.equals(ReserveMid)) {
+			if(now.compareTo(vo.getRdate()) >= 0) {
+				mv.setViewName("myPage/review");
+			}
+		}
+		
 		return mv;
 	}
 	

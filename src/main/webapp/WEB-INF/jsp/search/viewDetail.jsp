@@ -34,25 +34,23 @@
 				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 				  <div class="carousel-indicators d-flex flex-center">
 				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				    <c:forEach var="photo" items="${vo.photos}" varStatus="status">
+				    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.count}" aria-label="${status.count+1}"></button>
+				    </c:forEach>
 				  </div>
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
 				      <div>
-								<img src="img/gallery/${vo.thumb }" class="img-fluid">
+								<img src="upload/${vo.thumb }" class="img-fluid">
 							</div>
 				    </div>
+				    <c:forEach var="photo" items="${vo.photos}" varStatus="status">
 				    <div class="carousel-item">
 				      <div>
-								<img src="img/gallery/${vo.thumb }" class="img-fluid">
+								<img src="upload/${photo }" class="img-fluid">
 							</div>
 				    </div>
-				    <div class="carousel-item">
-				      <div>
-								<img src="img/gallery/${vo.thumb }" class="img-fluid">
-							</div>
-				    </div>
+				    </c:forEach>
 				  </div>
 				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -71,9 +71,11 @@ public class SearchController {
 		}
 		
 		CafeInfoVo vo = service.viewCafe(id);
+		List<String> photos = service.viewOtherPhoto(id);
 		List<ReviewVo> review = service.viewReview(id);
 		List<MenuVo> menu = service.viewMenu(id);
 		
+		vo.setPhotos(photos);
 		ZzimVo zzim = new ZzimVo();
 		zzim.setMid(mid);
 		zzim.setCid(Integer.parseInt(id));

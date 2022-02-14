@@ -166,6 +166,9 @@ body{
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+	.fz-12{
+		font-size:1rem;
+	}
 }
 
 /* Large devices (desktops, 992px and up) */

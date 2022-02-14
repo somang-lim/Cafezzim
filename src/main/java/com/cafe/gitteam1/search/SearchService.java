@@ -63,6 +63,12 @@ public class SearchService {
 		return vo;
 	}
 	
+	public List<String> viewOtherPhoto(String cid) {
+		List<String> photos = mapper.viewOtherPhoto(cid);
+		
+		return photos;
+	}
+	
 	public List<ReviewVo> viewReview(String cid) {
 		List<ReviewVo> list = mapper.viewReview(cid);
 		

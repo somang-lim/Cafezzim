@@ -16,6 +16,7 @@ public interface SearchMapper {
 	public List<String> cafeFindName(String findStr);
 	public Set<String> cafeFindLocation(String findStr);
 	public CafeInfoVo viewCafe(String cid);
+	public List<String> viewOtherPhoto(String cid);
 	public List<ReviewVo> viewReview(String cid);
 	public List<MenuVo> viewMenu(String cid);
 	public ReservInfoVo viewReserv(String rid);

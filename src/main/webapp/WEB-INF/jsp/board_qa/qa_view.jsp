@@ -16,7 +16,7 @@
 <title>카페 예약 사이트</title>
 <%@include file="../common.jsp"%>
 <link href="css/board.css" rel="stylesheet" />
-<script src="js/sign.js"></script>
+<script src="js/qa.js"></script>
 </head>
 
 
@@ -30,10 +30,12 @@
 	<section>
 		<div class="container">
 			<main class="form-board-notice-view">
-				<form name="frmBoard" method="post">
+				<form name="frmBoard">
 					<h1 class="h3 mb-4 fw-normal">Q&A</h1>
 					<!--테이블 ==========================================-->
 					<div class="ec-base-table typeWrite ">
+						<input type="hidden" name="nowPage" value="${page.nowPage}"/>
+						<input type="hidden" name="qa_serial" value="${vo.qa_serial}"/>
 						<table class="table view">
 							<colgroup>
 								<col style="width: 130px;" />
@@ -42,35 +44,63 @@
 							<tbody>
 								<tr class="subject">
 									<th scope="row">제목</th>
-									<td>홈페이지 이용 시 확인 해주세요!</td>
+									<td>${vo.subject}</td>
 								</tr>
 								<tr class="writer_name">
 									<th scope="row">작성자</th>
-									<td>카페</td>
+									<td>${vo.member_name}</td>
+								</tr>
+								<tr class="created_date">
+									<th scope="row">작성일</th>
+									<td>${vo.created_date}</td>
 								</tr>
 								<tr class="content">
-									<td colspan="2" class="main-text">안내합니다.</td>
+									<td colspan="2" class="main-text">${vo.content}</td>
 								</tr>
+								<c:if test="${not empty vo.qa_files}">
+									<tr class="fileZone">
+										<th scope="row">첨부파일</th>
+										<td class="qa_file">
+											<ul>
+												<c:forEach var="file" items="${vo.qa_files}">
+													<li>
+														<a href="upload/qa/${file.qa_file}" download>
+															${file.qa_origin_file}
+														</a>
+													</li>
+												</c:forEach>
+											</ul>
+										</td>
+									</tr>
+								</c:if>
 								<tr class="btnChooseZone">
 									<td>
 										<a href="qa" class="btn btn-outline-primary">목록</a>
 									</td>
 									<td class="btnSave">
-										<a href="" onclick="" class="btn btn-outline-danger">삭제</a>
-										<a href="qa_modify" class="btn btn-outline-primary">수정</a>
-										<a href="qa_repl" class="btn btn-primary">답변</a>
+									<c:if test="${vo.depth eq 0}">
+										<c:if test="${sessionScope.grade eq 'master'}">
+											<button type="button" id="btnRepl" class="btn btn-primary">답변</button>
+										</c:if>
+										<c:if test="${sessionScope.name eq vo.member_name}">
+											<a href="${path}/qa_modify?qa_serial=${vo.qa_serial}" class="btn btn-outline-primary">수정</a>
+										</c:if>
+										<c:if test="${sessionScope.name eq vo.member_name || sessionScope.grade eq 'master'}">
+											<button class="btn btn-outline-danger" id="btnDelete">삭제</button>
+										</c:if>
+									</c:if>
+									<c:if test="${vo.depth eq 1}">
+										<c:if test="${sessionScope.name eq vo.member_name}">
+											<a href="${path}/qa_modify?qa_serial=${vo.qa_serial}" class="btn btn-outline-primary">수정</a>
+										</c:if>
+										<c:if test="${sessionScope.name eq vo.member_name || sessionScope.grade eq 'master'}">
+											<button type="button" class="btn btn-outline-danger" id="btnDeleteRepl">삭제</button>
+										</c:if>
+									</c:if>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-					<div class="prev-next-board">
-							<ul>
-								<li class="prev"><strong>이전글</strong><a
-									href="">카카오톡 알림톡 서비스 OPEN</a></li>
-								<li class="next"><strong>다음글</strong><a
-									href="">상품별 사이즈 측정 방법</a></li>
-							</ul>
 					</div>
 				</form>
 			</main>

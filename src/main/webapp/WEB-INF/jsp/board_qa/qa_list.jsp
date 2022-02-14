@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -16,7 +17,7 @@
 <title>카페 예약 사이트</title>
 <%@include file="../common.jsp" %>
 <link href="css/board.css" rel="stylesheet" />
-<script src="js/sign.js"></script>
+<script src="js/qa.js"></script>
 </head>
 
 
@@ -30,55 +31,97 @@
 	<section>
 		<div class="container">
 			<main class="form-board-qa">
-				<form name="frmBoard" method="post">
+				<form name="frmBoard">
 					<h1 class="h3 mb-4 fw-normal">Q&A</h1>
-					<div class="searchZone mb-5">
-						<input id="board_no" name="board_no" value="1" type="hidden">
-						<input id="page" name="page" value="1" type="hidden">
-						<input id="board_sort" name="board_sort" value="" type="hidden">
-						<select id="search_key" class="search_key" name="search_key">
-							<option value="subject">제목</option>
-							<option value="content">내용</option>
-							<option value="writer_name">글쓴이</option>
-							<option value="member_id">아이디</option>
-						</select>
-						<input id="search" name="search" class="inputTypeText" placeholder="" value="" type="text">
-						<a href="#none" class="btnNormal" onclick="">찾기</a>
+					<div class="searchZone mb-3">
+						<input id="qa_serial" name="qa_serial" type="hidden">
+						<input id="nowPage" name="nowPage" value="${page.nowPage}" type="hidden">
+						<input id="qa_search" name="qa_search" class="inputTypeText" placeholder="검색어를 입력하세요." value="${page.qa_search}" type="search">
+						<button type="button" id="btnQaSearch" class="btnNormal">찾기</button>
 					</div>
 					<!--테이블 ==========================================-->
-					<table class="table table-hover">
+					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col" style="width: 8%">번호</th>
-								<th scope="col" style="width: 60%">제목</th>
-								<th scope="col" style="width: 15%">작성자</th>
-								<th scope="col" style="width: 20%">작성일</th>
+								<th scope="col" style="width: 5%; font-size: 0.9rem">NO</th>
+								<th scope="col" style="width: 55%; font-size: 0.9rem">제목</th>
+								<th scope="col" style="width: 10%; font-size: 0.9rem">작성자</th>
+								<th scope="col" style="width: 10%; font-size: 0.9rem">작성일</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="cnt" begin="1" end="10">
+							<c:forEach var="vo" items="${list}">
 								<tr>
-									<td scope="row" class="num">${cnt}</td>
-									<td class="subject"><a href="qa_view">Mark</a></td>
-									<td class="writer-name">@mdo</td>
-									<td class="write-day">2022-01-22</td>
+									<td scope="row" class="num" style="font-size: 0.9rem">${vo.qa_serial}</td>
+									<td class="subject">
+										<input type="hidden" name="qa_serial" value="${vo.qa_serial}"/>
+										<input type="hidden" name="grpno" value="${vo.grpno}"/>
+										<input type="hidden" name="repl_id" value="${vo.repl_id}"/>
+										<c:if test="${vo.secret == true}">
+											<c:choose>
+												<c:when test="${sessionScope.name eq vo.member_name
+																		 || sessionScope.member_id eq vo.repl_id
+																	 	 || sessionScope.grade eq 'master'}">
+													<a href="${path}/qa_view?qa_serial=${vo.qa_serial}" style="font-size:0.9rem">${vo.subject}</a>
+													<c:if test="${vo.file_cnt > 0}">
+														<img src="./img/paper-clip.png" style="width:15px; height:15px;">
+													</c:if>
+													<c:if test="${vo.depth == 0}">
+														<img src="./img/padlock.png" style="width:15px; height:15px;">
+													</c:if>
+												</c:when>
+												<c:otherwise>
+													<span style="font-size:0.9rem;">${vo.subject}</span>
+													<c:if test="${vo.file_cnt > 0}">
+														<img src="./img/paper-clip.png" style="width:15px; height:15px;">
+													</c:if>
+													<c:if test="${vo.depth == 0}">
+														<img src="./img/padlock.png" style="width:15px; height:15px;">
+													</c:if>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+										<c:if test="${vo.secret == false}">
+											<a href="${path}/qa_view?qa_serial=${vo.qa_serial}" style="font-size:0.9rem">${vo.subject}</a>
+											<c:if test="${vo.file_cnt > 0}">
+												<img src="./img/paper-clip.png" style="width:15px; height:15px;">
+											</c:if>
+										</c:if>
+									</td>
+									<td class="writer-name" style="font-size: 0.9rem">${vo.member_name}</td>
+									<td class="write-day" style="font-size: 0.9rem">${vo.created_date}</td>
 								</tr>
 							</c:forEach>
+							<c:if test="${not empty sessionScope.member_id}">
+								<tr class="btnChooseZone">
+									<td colspan="4" class="qa_insert">
+										<a href="qa_insert" class="btn btn-outline-primary">글쓰기</a>
+									</td>
+								</tr>
+							</c:if>
 						</tbody>
 					</table>
 					<!-- 페이징 처리 ==========================================-->
-					<div class="mt-5">
+					<div class="mt-3">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination pagination-sm justify-content-center">
-								<li class="page-item"><a class="page-link" href="#"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-								<c:forEach var="num" begin="1" end="5">
-									<li class="page-item"><a class="page-link" href="#">${num}</a></li>
+								<c:if test="${page.startPage > 1}">
+									<li class="page-item">
+										<a class="page-link" onclick="qa.page(${page.startPage-1})" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+								</c:if>
+								<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+									<li class="page-item"><a class="page-link" onclick="qa.page(${i})">${i}</a></li>
 								</c:forEach>
-								<li class="page-item"><a class="page-link" href="#"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a></li>
+								<c:if test="${page.endPage < page.totPage}">
+									<li class="page-item">
+										<a class="page-link" onclick="qa.page(${page.endPage+1})" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</c:if>
 							</ul>
 						</nav>
 					</div>

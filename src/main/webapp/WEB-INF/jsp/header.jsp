@@ -27,6 +27,7 @@
 				<li class="nav-item" data-anchor="data-anchor"><a
 					class="nav-link fw-medium" href="#faq">FAQ</a></li>
 					<li class="nav-item"><a class="nav-link fw-medium" href="notice">Notice</a></li>
+					<li class="nav-item"><a class="nav-link fw-medium" href="qa">Q&amp;A</a></li>
 				<c:if test="${empty sessionScope.member_id}">
 					<li class="nav-item"><a class="nav-link fw-medium" href="signIn">로그인</a></li>
 					<li class="nav-item"><a class="nav-link fw-medium" href="signUp">회원가입</a></li>
