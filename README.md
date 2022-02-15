@@ -48,4 +48,4 @@ Cafe Seat Reservation Site
 + 길태수
 
 ### 라이센스 License
-카페찜 프로젝트는 [MIT License]()를 따르고 있습니다.
+카페찜 프로젝트는 [MIT License](https://github.com/CafeZzim/Cafezzim/blob/master/LICENSE)를 따르고 있습니다.
