@@ -36,8 +36,8 @@ Cafe Seat Reservation Site
 
 ### 개발환경 Developmenet Environment
 + Eclipse IDE / Spring Tool Suite 4
-+ Apache Tomcat 9
-+ MySQL
++ Apache Tomcat 8
++ MariaDB 10.1
 
 ### 팀원 Contributors
 + [최준혁](https://github.com/jh0718)
