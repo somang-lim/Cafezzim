@@ -30,7 +30,7 @@ Cafe Seat Reservation Site
 
 ### 특징적 기술 Key Features
 + [Kakao OAuth 2.0](https://developers.kakao.com/docs/latest/ko/kakaologin/common#intro) - 카카오 소셜 로그인
-+ [Commons Email](https://commons.apache.org/proper/commons-email/) - 이메일로 임시 비밀번호 발급
++ [Commons Email](https://commons.apache.org/proper/commons-email/) - 임시 비밀번호를 이메일로 전송
 + [Naver Map API](https://www.ncloud.com/product/applicationService/maps) - 현재 사용자 위치 근처의 카페를 검색할 때 사용
 + [import.payment API](https://api.iamport.kr/) - 메뉴 결제할 때 사용
 
