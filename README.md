@@ -44,7 +44,7 @@ Cafe Seat Reservation Site
 + [최준혁](https://github.com/jh0718)
 + [김성겸](https://github.com/skyeome)
 + [조민지](https://github.com/miiiiinji)
-+ [임소망](https://github.com/doododi)
++ [임소망](https://github.com/somang-lim)
 + [박수혜](https://github.com/soohyepark)
 + 길태수
 
