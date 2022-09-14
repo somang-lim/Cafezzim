@@ -21,6 +21,7 @@ Cafe Seat Reservation Site
 ### 사용언어 Main Languages
 + Java8
 + jQuery
++ MyBatis
 + HTML5
 + CSS3
 
